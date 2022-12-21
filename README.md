@@ -10,3 +10,6 @@ Contents from Canvas:
 - A bit more detail about some feature or accomplishment you found particularly satisfying.
 - An explanation of the PIO part of your code, including a diagram of the overal logic, as well as an introduction to the RP2040 PIO module and what makes it a unique asset for a microcontroller.
 - Team overview (ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages.
+
+- Use your new team github organization to publish a repo containing your project code. Include a README.md file with a brief overview and block diagram of the code in this repo. 
+- Upload all photos/videos you've taken for project documentation (components, debugging, progress, final demos, demo day action shots), as well as your demo day slides you set up on your monitors, to this Google Drive Links to an external site.under your team folder. Send me a note if you're planning to upload more than 10GB.
