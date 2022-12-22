@@ -44,7 +44,8 @@ Contents from Canvas:
 
 ## Project development
 
-## Reflections: Design & components selection (advantages and disadvantages)
+## Reflections
+Design & components selection (advantages and disadvantages)
 
 ## Feature Highlights
 
@@ -54,6 +55,7 @@ Contents from Canvas:
 ### Introduction to the RP2040 PIO module
 [discuess what makes it a unique asset for a microcontroller]
 
-## Team overview (ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages
+## Team overview 
+(ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages
 
 
