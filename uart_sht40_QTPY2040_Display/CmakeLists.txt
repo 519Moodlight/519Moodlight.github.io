@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.13) # CMAKE (heading)
+include(pico_sdk_import.cmake) # CMAKE -> PICO SDK (include)
+
+project(project C CXX ASM) # CMAKE ("project")
+pico_sdk_init() # PICO SDK (initialization)
+
+add_executable(project project.c) # CMAKE (target)
+
+pico_generate_pio_header(project ${CMAKE_CURRENT_LIST_DIR}/i2c.pio OUTPUT_DIR ${CMAKE_CURRENT_LIST_DIR}/generated) # PICO SDK (PIO)
+
+target_sources(project PRIVATE project.c pio_i2c.c pio_i2c.h sht4x.c sht4x.h)
+
+target_link_libraries(project PRIVATE pico_stdlib hardware_pio hardware_pwm) # CMAKE -> C linker)
+
+pico_enable_stdio_usb(project 1) # PICO SDK (USB)
+pico_enable_stdio_uart(project 1) # PICO SDK (USB)
+
+pico_add_extra_outputs(project) # PICO SDK (UF2)
