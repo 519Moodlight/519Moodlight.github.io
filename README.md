@@ -13,3 +13,47 @@ Contents from Canvas:
 
 - Use your new team github organization to publish a repo containing your project code. Include a README.md file with a brief overview and block diagram of the code in this repo. 
 - Upload all photos/videos you've taken for project documentation (components, debugging, progress, final demos, demo day action shots), as well as your demo day slides you set up on your monitors, to this Google Drive Links to an external site.under your team folder. Send me a note if you're planning to upload more than 10GB.
+
+##Project Showcase
+[Photos and Pictures here]
+
+## Project instrcutions
+### Components:
+- Pico4ML
+- Adafruit SHT40 
+- Adafruit QT-PY 2040
+- 16x32 RGB LED matrix panel 
+- PC/Laptop as REPL screen (Can be removed in realiife application)
+- Jump wires
+- Resistors [Need to specify actual values]
+- Adafruit Perma-Proto Half-sized Breadboard PCB
+
+### Block diagram:
+
+![image](https://user-images.githubusercontent.com/114244957/209054737-e132e7d7-39e1-4b68-8af5-1b68817cdfec.png)
+
+### Connection diagram: [maybe can be simplified more?]
+
+![WechatIMG581](https://user-images.githubusercontent.com/114244957/209051956-f2047703-e310-42d6-8110-a75a9b334fee.jpeg)
+
+![WechatIMG582](https://user-images.githubusercontent.com/114244957/209051972-e2344b0c-3826-45e2-a542-591ec6ee5786.jpeg)
+
+### RP2040 dev environment
+
+### Links to codes
+
+## Project development
+
+## Reflections: Design & components selection (advantages and disadvantages)
+
+## Feature Highlights
+
+## PIO in use
+### Diagram of the overal logic
+
+### Introduction to the RP2040 PIO module
+[discuess what makes it a unique asset for a microcontroller]
+
+## Team overview (ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages
+
+
