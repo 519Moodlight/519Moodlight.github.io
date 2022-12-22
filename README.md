@@ -1,5 +1,5 @@
 # 519Moodlight.github.io
-All contents can be re-write in the README file.
+All contents are written first in the README file.
 
 Contents from Canvas:
 - A project showcase (brief project overview with cool photos/videos, probably on your main page).
@@ -38,7 +38,7 @@ Contents from Canvas:
 
 ![WechatIMG582](https://user-images.githubusercontent.com/114244957/209051972-e2344b0c-3826-45e2-a542-591ec6ee5786.jpeg)
 
-### RP2040 dev environment
+### RP2040 development environment
 
 ### Links to codes
 
@@ -48,6 +48,12 @@ Contents from Canvas:
 Design & components selection (advantages and disadvantages)
 
 ## Feature Highlights
+- Transfer Humidity and Temperature values to QTPY2040 using uart
+- Translate PWM signal output into Arduino readable signal (PWM or Analog) ??? need modification
+- Concise information transferred from Pico4ML about person detection 
+- Intelligent sensor that will only turn on when a human is close-by 
+- Vivid graphic display using LED matrix 
+- 6 models display control -- humidity adjust, temperature adjust, feeling temperature, visualization (specific face patterns), rainbow (10 colors to show different humidity and temperature), DEMO (being able to control HUMIDITY ADJUST & TEMPERATURE ADJUST)
 
 ## PIO in use
 ### Diagram of the overal logic
@@ -57,5 +63,13 @@ Design & components selection (advantages and disadvantages)
 
 ## Team overview 
 (ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages
+- Katrina Ji
 
+Personal github: 
+- Yuchen Wang
+
+Personal github:
+- Ryan Zhang
+
+Personal github:
 
