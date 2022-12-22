@@ -32,7 +32,7 @@ Contents from Canvas:
 
 ![image](https://user-images.githubusercontent.com/114244957/209054737-e132e7d7-39e1-4b68-8af5-1b68817cdfec.png)
 
-### Connection diagram: [maybe can be simplified more?]
+### Connection diagram: [maybe can be simplified more, combine two diagrams together]
 
 ![WechatIMG581](https://user-images.githubusercontent.com/114244957/209051956-f2047703-e310-42d6-8110-a75a9b334fee.jpeg)
 
