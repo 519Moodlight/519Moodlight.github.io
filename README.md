@@ -14,8 +14,12 @@ Contents from Canvas:
 - Use your new team github organization to publish a repo containing your project code. Include a README.md file with a brief overview and block diagram of the code in this repo. 
 - Upload all photos/videos you've taken for project documentation (components, debugging, progress, final demos, demo day action shots), as well as your demo day slides you set up on your monitors, to this Google Drive Links to an external site.under your team folder. Send me a note if you're planning to upload more than 10GB.
 
-##Project Showcase
-[Photos and Pictures here]
+## Project Showcase
+![DSC00520](https://user-images.githubusercontent.com/105755054/209399611-c63fcece-f27d-4203-9335-e9cd4a059b81.JPG)
+![DSC00521](https://user-images.githubusercontent.com/105755054/209399661-72d4c804-97a8-429d-8177-e13ec1642303.JPG)
+![DSC00518](https://user-images.githubusercontent.com/105755054/209399670-80a55a39-d921-40ad-bdda-d567670175ac.JPG)
+![DSC00517](https://user-images.githubusercontent.com/105755054/209399679-f63e8f3c-6dd7-4774-b391-c7e45855b4cc.JPG)
+![DSC00519](https://user-images.githubusercontent.com/105755054/209399728-d41d9359-d014-4621-a9dd-84a485e6c4e3.JPG)
 
 ## Project instrcutions
 ### Components:
@@ -56,6 +60,10 @@ Design & components selection (advantages and disadvantages)
 - 6 models display control -- humidity adjust, temperature adjust, feeling temperature, visualization (specific face patterns), rainbow (10 colors to show different humidity and temperature), DEMO (being able to control HUMIDITY ADJUST & TEMPERATURE ADJUST)
 
 ## PIO in use
+- I2C communication protocol base on PIO 
+[PIO Code Explain]
+
+
 ### Diagram of the overal logic
 
 ### Introduction to the RP2040 PIO module
@@ -68,7 +76,7 @@ Design & components selection (advantages and disadvantages)
 Personal github: 
 - Yuchen Wang
 
-Personal github:
+Personal github: wangybv@seas.upenn.edu
 - Ryan Zhang
 
 Personal github:
