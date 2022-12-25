@@ -59,7 +59,10 @@ There are mainly
 ## Project development
 ### Beginning
 
-### Midpoint Checkput
+
+### Midpoint Checkup
+This the the team's midpoint checkup slide shows. It is for internal use during the development of the project. https://docs.google.com/presentation/d/15bB733aYIH5O1ynS-uNRryCd-YGT2AP3RCA227Z42LM/edit?usp=sharing
+
 The team has setup four midpoint checks to ensure that the team have a right pace in the project. The four checkput items are:
 - Pico4ML is able to perform person detection and return signals.
 - Adafruit SHT40 is able to return humidity and temperature values.
@@ -72,13 +75,15 @@ The team has also successfully perform humidity and temperature detection in SHT
 
 ![image](https://user-images.githubusercontent.com/114244957/209482149-3001af36-f5fa-468c-a7f0-c49ae5233d5d.png)
 
-
-
+The team always had REPL to indicate the chip process and data return.
 
 ### Final Design
+This is the team's final demo day slideshow. It was initally in slides. During the demo day, it was changed to a single page poster.
+https://docs.google.com/presentation/d/1gsq2rLiZDhrBSmuCHu-VE6WdknTC6gEK/edit?usp=sharing&ouid=117714499329064750219&rtpof=true&sd=true
+
 After a more detailed look at the RP2040 pins, the team realized that they don't have enough pins to achieve more complex communication. Thus, the team has simplified the communication method. Instead of useing I2C to communciate between Pico4ML and RP2040, the team has chosen to use ```GPIO``` high and low voltage as the signal. 
 
-The team's initial plan is to use two QTPY boards to communicate. One is only responsible for getting the sensor data, the other will be the MAIN board that collects all the information and intergrate the together. After discussion, the team realized that one single board can finish all the work. Thus, 
+During the final stage, the team ensured that all the modules are working individually. The team's main focus was on the communication The team's initial plan is to use two QTPY boards to communicate. One is only responsible for getting the sensor data, the other will be the MAIN board that collects all the information and intergrate the together. After discussion, the team realized that one single board can finish all the work. Thus, 
 
 
 ## Reflections
