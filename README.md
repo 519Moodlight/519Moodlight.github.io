@@ -55,14 +55,30 @@ All of the indications are presented on a 16x32 RGB LED matrix panel. The device
 ### RP2040 development environment
 
 ### Links to codes
-
+There are mainly 
 ## Project development
 ### Beginning
 
 ### Midpoint Checkput
+The team has setup four midpoint checks to ensure that the team have a right pace in the project. The four checkput items are:
+- Pico4ML is able to perform person detection and return signals.
+- Adafruit SHT40 is able to return humidity and temperature values.
+- LCD can communicate with RP2040.
+- Some kind of REPL that returns sensor data.
+
+In the midepoint check, the team has successfully performed person detection in Pico4ML. Pico4ML produces a "person score" that shows if the detected object is a person. The score range from negative to positive. When the score is over 90, the detected object is a person. Usually, a human in a goot light and backgroun environemnt will get a score at around 110. The team was thinking to use I2C to directly tansfer this "person score" to RP2040. RP2040 will do the calculation.
+
+The team has also successfully perform humidity and temperature detection in SHT40. THe sensor can have a directly communication with the RP2040 using PIO. More detailed discription about using PIO is discussed in the later section. However, the team realized that using a LCD as the display cannot give out the most infomation. Since our project highly rely on the heat index map (shown below). Our instructor gave the advice that the team should inplement the heat map to the display. LCD would not be sufficient. Thus, after discussion, the team has decided to use a 16x32 RGB LED matrix panel as the final display.
+
+![image](https://user-images.githubusercontent.com/114244957/209482149-3001af36-f5fa-468c-a7f0-c49ae5233d5d.png)
+
+
+
 
 ### Final Design
+After a more detailed look at the RP2040 pins, the team realized that they don't have enough pins to achieve more complex communication. Thus, the team has simplified the communication method. Instead of useing I2C to communciate between Pico4ML and RP2040, the team has chosen to use ```GPIO``` high and low voltage as the signal. 
 
+The team's initial plan is to use two QTPY boards to communicate. One is only responsible for getting the sensor data, the other will be the MAIN board that collects all the information and intergrate the together. After discussion, the team realized that one single board can finish all the work. Thus, 
 
 
 ## Reflections
