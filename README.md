@@ -15,6 +15,17 @@ Contents from Canvas:
 - Upload all photos/videos you've taken for project documentation (components, debugging, progress, final demos, demo day action shots), as well as your demo day slides you set up on your monitors, to this Google Drive Links to an external site.under your team folder. Send me a note if you're planning to upload more than 10GB.
 
 ## Project Showcase
+Our team aims to invent a sensing device that will measure the in-room apparent temperature by detecting room temperature and humidity. The user can customize their favoriate display mode. The device has six modes: 
+- Mode TMEP: shows the room temperature
+- Mode RHUM: shows the room relative humidity
+- Mode FEEL: shows the in-room apparent temperature, i.e. how your body feels in the room
+- Mode FACE: shows either a smiling or crying face based on temperatuer and humidity, can be customized by the user
+- Mode RAINBOW: shows a heat index map across all the measuing range for the sensor and indicate the "location" of the current measurements
+- Mode ROLL: shows all the five modes in a rolling sequence
+
+show relative information about apparent temperature, apparent temperature history (curve diagram) and suggestions on a LCD display.
+It will sense human activity and turn off when there is no human movement.
+
 ![DSC00520](https://user-images.githubusercontent.com/105755054/209399611-c63fcece-f27d-4203-9335-e9cd4a059b81.JPG)
 ![DSC00521](https://user-images.githubusercontent.com/105755054/209399661-72d4c804-97a8-429d-8177-e13ec1642303.JPG)
 ![DSC00518](https://user-images.githubusercontent.com/105755054/209399670-80a55a39-d921-40ad-bdda-d567670175ac.JPG)
