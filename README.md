@@ -22,6 +22,7 @@ Our team aims to invent a sensing device that will measure the in-room apparent 
 - Mode FACE: shows either a smiling or crying face based on temperatuer and humidity, can be customized by the user
 - Mode RAINBOW: shows a heat index map across all the measuing range for the sensor and indicate the "location" of the current measurements
 - Mode ROLL: shows all the five modes in a rolling sequence
+
 All of the indications are presented on a 16x32 RGB LED matrix panel. The device is also equipped with a person detection function. When ever a human is reading the infomation on the panel, the panel will be changed to the user's favorite mode. For example, if the user prefers to see the RAINBOW mode, he/she will set the mode to their prefer mode. The next time when he/she reads the the panel, the camera will detect human activity and change the display to RAINBOW mode until they leave.
 
 ![DSC00521](https://user-images.githubusercontent.com/105755054/209399661-72d4c804-97a8-429d-8177-e13ec1642303.JPG)
@@ -56,6 +57,13 @@ All of the indications are presented on a 16x32 RGB LED matrix panel. The device
 ### Links to codes
 
 ## Project development
+### Beginning
+
+### Midpoint Checkput
+
+### Final Design
+
+
 
 ## Reflections
 Design & components selection (advantages and disadvantages)
