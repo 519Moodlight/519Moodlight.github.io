@@ -143,7 +143,7 @@ void read_temp_hum(int32_t *temp, int32_t *hum, PIO pio, uint sm, uint32_t addr)
 ![Screen Shot 2022-12-23 at 15 14 31](https://user-images.githubusercontent.com/105755054/209403700-2b47f540-c5d8-4c41-a90c-52999b19417e.png)
 
 
-- QTPY2040 and SH40 with I2C
+- QTPY2040 and SHT40 with I2C
 
 ![Screen Shot 2022-12-23 at 15 38 48](https://user-images.githubusercontent.com/105755054/209403649-c859e95d-843f-4192-a022-69d03cebf5af.png)
 
@@ -155,11 +155,12 @@ void read_temp_hum(int32_t *temp, int32_t *hum, PIO pio, uint sm, uint32_t addr)
 (ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages
 - Katrina Ji
 
-Personal github: 
+Personal github: https://github.com/katrinaji
+
+Email: katji@seas.upenn.edu
+
 - Yuchen Wang
 
 Personal github: wangybv@seas.upenn.edu
-- Ryan Zhang
 
-Personal github:
 
