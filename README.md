@@ -22,9 +22,7 @@ Our team aims to invent a sensing device that will measure the in-room apparent 
 - Mode FACE: shows either a smiling or crying face based on temperatuer and humidity, can be customized by the user
 - Mode RAINBOW: shows a heat index map across all the measuing range for the sensor and indicate the "location" of the current measurements
 - Mode ROLL: shows all the five modes in a rolling sequence
-
-show relative information about apparent temperature, apparent temperature history (curve diagram) and suggestions on a LCD display.
-It will sense human activity and turn off when there is no human movement.
+All of the indications are presented on a 16x32 RGB LED matrix panel.
 
 ![DSC00520](https://user-images.githubusercontent.com/105755054/209399611-c63fcece-f27d-4203-9335-e9cd4a059b81.JPG)
 ![DSC00521](https://user-images.githubusercontent.com/105755054/209399661-72d4c804-97a8-429d-8177-e13ec1642303.JPG)
