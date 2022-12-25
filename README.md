@@ -58,10 +58,12 @@ All of the indications are presented on a 16x32 RGB LED matrix panel. The device
 There are mainly 
 ## Project development
 ### Beginning
-
+This the the team's initial proposal slideshow. A detialed description about the project is shown in the video.
+https://docs.google.com/presentation/d/1t87cv9p3CeJUlsETCPSfEi2vsW76WDrAiFLQtDDplcw/edit?usp=sharing
+https://youtu.be/xyOEmyO56Lc
 
 ### Midpoint Checkup
-This the the team's midpoint checkup slide shows. It is for internal use during the development of the project. https://docs.google.com/presentation/d/15bB733aYIH5O1ynS-uNRryCd-YGT2AP3RCA227Z42LM/edit?usp=sharing
+This the the team's midpoint checkup slideshow. It is for internal use during the development of the project. https://docs.google.com/presentation/d/15bB733aYIH5O1ynS-uNRryCd-YGT2AP3RCA227Z42LM/edit?usp=sharing
 
 The team has setup four midpoint checks to ensure that the team have a right pace in the project. The four checkput items are:
 - Pico4ML is able to perform person detection and return signals.
@@ -83,7 +85,7 @@ https://docs.google.com/presentation/d/1gsq2rLiZDhrBSmuCHu-VE6WdknTC6gEK/edit?us
 
 After a more detailed look at the RP2040 pins, the team realized that they don't have enough pins to achieve more complex communication. Thus, the team has simplified the communication method. Instead of useing I2C to communciate between Pico4ML and RP2040, the team has chosen to use ```GPIO``` high and low voltage as the signal. 
 
-During the final stage, the team ensured that all the modules are working individually. The team's main focus was on the communication The team's initial plan is to use two QTPY boards to communicate. One is only responsible for getting the sensor data, the other will be the MAIN board that collects all the information and intergrate the together. After discussion, the team realized that one single board can finish all the work. Thus, 
+During the final stage, the team ensured that all the modules are working individually. The team's main focus was on the communication. The team's initial plan was to use two QTPY boards to communicate. One would be responsible for getting the sensor data, the other would be the MAIN board that collects all the information and intergrate the together. After discussion, the team realized that one single board can finish all the work. Since the communication process has been simplified, Pico4ML and QTPY will only communicate using one GPIO pin. The new RGB LED matrix will have to use an Arduino board. The communication between Arduino and QTPY is UART.
 
 
 ## Reflections
