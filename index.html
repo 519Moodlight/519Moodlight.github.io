@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>519 Moodlight Final Project</title>
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <p>I'm hosted with GitHub Pages.</p>
-    </body>
-</html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>  
+    div.padded {  
+      padding-top: 0px;  
+      padding-right: 100px;  
+      padding-bottom: 0.25in;  
+      padding-left: 100px;  
+    }  
+  </style> 
+<title>CS 184 Final Project</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+</head>
+<body>
+<br />
+<h1 align="middle">Final Project: Texture support in ray tracer</h1>
+<h4 align="middle">Charlotte Mei</h4>
+<h4 align="middle">Jingqi Huang</h4>
+<h4 align="middle">Ryan Solan</h4>
+<h4 align="middle">Yuankai Yang</h4>
+
+<div class="padded">
+    <h2 align="middle">Problem Description</h2>
+    <p>In project 3-1 and 3-2 we implemented pathtraced rendering on glass, mirror and microfacet material.
+        However, we didn't have support for various textures. In this final project, we want to add texture support 
+        to make the rendering more appealing and interesting.</p >
+    
+    <h2 align="middle">Goals and Deliverables</h2>
+   <div align="left">
+    <h4 align="middle">What we plan to deliver?</h2>
+    <p>Our goal is to be able to map various textures including cloths and simple 2D textures to objects.</p >
+    <p>We want to keep the rendering fast, reusable, and able to cope with different textures realistically.
+        We think that the basic logic of implementing texture mapping is the same as the one introduced in class.
+        We could build on that and try to find suitable reflection and refraction for varied and complicated
+        textures such as clothes, which involve more complex reflection and refraction techniques.
+    </p >
+
+    <h4 align="middle">What we hope to deliver?</h2>
+    <p>We would hope to achieve a rabbit wearing realistic cloth (including pleats and yarn), or make the rabbit look furry. To accomplish this
