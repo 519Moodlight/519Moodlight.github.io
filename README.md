@@ -48,12 +48,28 @@ All of the indications are presented on a 16x32 RGB LED matrix panel. The device
 
 ### Connection diagram: [maybe can be simplified more, combine two diagrams together]
 
-![WechatIMG581](https://user-images.githubusercontent.com/114244957/209051956-f2047703-e310-42d6-8110-a75a9b334fee.jpeg)
+![Diagram -3](https://user-images.githubusercontent.com/105755054/209586978-436b4cda-e3fc-4f70-898d-24c44655fe77.jpg)
 
-![WechatIMG582](https://user-images.githubusercontent.com/114244957/209051972-e2344b0c-3826-45e2-a542-591ec6ee5786.jpeg)
+![Diagram -4](https://user-images.githubusercontent.com/105755054/209586979-868ce4b7-8ca1-4089-a0ca-004812f5446d.jpg)
 
-### RP2040 development environment
+### Development environment
 
+- Vidusl Studio Code Version: 1.74.2
+```
+Test on: MacBook Pro (14-inch, 2021)
+
+Software: macOS Monterey 12.6 
+```
+
+- Arduino IDE Version: 1.8.20
+```
+Test on: MacBook Pro (14-inch, 2021)
+
+Software: macOS Monterey 12.6 
+```
+
+
+    
 ### Links to codes
 There are mainly 
 ## Project development
