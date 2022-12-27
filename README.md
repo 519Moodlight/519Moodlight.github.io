@@ -39,8 +39,7 @@ All of the indications are presented on a 16x32 RGB LED matrix panel. The device
 - 16x32 RGB LED matrix panel 
 - Arduino Uno Rev3
 - PC/Laptop as REPL screen (Can be removed in realiife application)
-- Jump wires
-- Resistors [Need to specify actual values]
+- Resistors
 - Adafruit Perma-Proto Half-sized Breadboard PCB
 
 ### Block diagram:
@@ -112,12 +111,16 @@ The team's initial design is to use two QTPY 2040 and one Pico4ML. It was design
 2. The device was designed to be mounted on the wall. The team would like to reduce the weight and size of the device to make it more compact.
 
 ## Feature Highlights
-- Transfer Humidity and Temperature values to QTPY2040 using uart
-- Translate PWM signal output into Arduino readable signal (PWM or Analog) ??? need modification
-- Concise information transferred from Pico4ML about person detection 
-- Intelligent sensor that will only turn on when a human is close-by 
-- Vivid graphic display using LED matrix 
+- Transfer Humidity and Temperature values in QTPY2040 to Arduino Uno Rev3 using UART
+
+[need code]
+
+- Vivid graphic display using LED matrix
+
 - 6 models display control -- humidity adjust, temperature adjust, feeling temperature, visualization (specific face patterns), rainbow (10 colors to show different humidity and temperature), DEMO (being able to control HUMIDITY ADJUST & TEMPERATURE ADJUST)
+
+[demo code in C]
+
 
 ## PIO in use
 - I2C communication protocol base on PIO 
