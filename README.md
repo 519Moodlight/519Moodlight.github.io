@@ -37,6 +37,7 @@ All of the indications are presented on a 16x32 RGB LED matrix panel. The device
 - Adafruit SHT40 
 - Adafruit QT-PY 2040
 - 16x32 RGB LED matrix panel 
+- Arduino Uno Rev3
 - PC/Laptop as REPL screen (Can be removed in realiife application)
 - Jump wires
 - Resistors [Need to specify actual values]
@@ -67,11 +68,10 @@ Test on: MacBook Pro (14-inch, 2021)
 
 Software: macOS Monterey 12.6 
 ```
-
-
     
 ### Links to codes
-There are mainly 
+SEE REPO. 
+
 ## Project development
 ### Beginning
 This the the team's initial proposal slideshow. A detialed description about the project is shown in the video.
@@ -103,9 +103,13 @@ After a more detailed look at the RP2040 pins, the team realized that they don't
 
 During the final stage, the team ensured that all the modules are working individually. The team's main focus was on the communication. The team's initial plan was to use two QTPY boards to communicate. One would be responsible for getting the sensor data, the other would be the MAIN board that collects all the information and intergrate the together. After discussion, the team realized that one single board can finish all the work. Since the communication process has been simplified, Pico4ML and QTPY will only communicate using one GPIO pin. The new RGB LED matrix will have to use an Arduino board. The communication between Arduino and QTPY is UART.
 
-
 ## Reflections
-Design & components selection (advantages and disadvantages)
+Design & components selection
+The team's initial design is to use two QTPY 2040 and one Pico4ML. It was designed so that the project would be highly "modulized". Each teammate could work on their own componenet without interference. However, this design would reqiure a lot of communication among three boards. The power consumption would also be high. During project development, the team has changed their stagertgy to intergate all functions to as few hardwares as possible. There are two reasons:
+
+1. The team has change from LCD display to a larger LED display. The larger LED display will be more visible from long distance and contains more infomation. To implement the display, the team used an Arduino Uno Rev3. This increased the number of boards in the system. Thus, the team decided to reduce one QTPY 2040 to simplify the system.
+
+2. The device was designed to be mounted on the wall. The team would like to reduce the weight and size of the device to make it more compact.
 
 ## Feature Highlights
 - Transfer Humidity and Temperature values to QTPY2040 using uart
