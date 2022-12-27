@@ -209,7 +209,15 @@ void read_temp_hum(int32_t *temp, int32_t *hum, PIO pio, uint sm, uint32_t addr)
 
 
 ### Introduction to the RP2040 PIO module
-[discuess what makes it a unique asset for a microcontroller]
+One unique feature of the RP2040 microcontroller from the Raspberry Pi Foundation is its Programmable I/O (PIO) peripheral. The focus of PIO is serial communication. Most microcontrollers have hardware support for popular serial protocols such as I²C, SPI, and UART. However, this hardware support is always limited both in the number of serial interfaces and the types of serial interfaces that can be used, such as Arduino uno Rev3 only having 1 UART port. If you have a non-standard serial interface you need to support, you may have to resort to bit-banging I/O pins to implement it, tying up the microcontroller core to get the timing right. PIO aims to solve this problem by providing a highly configurable, programmable I/O peripheral that will take care of the bit-banging and provide simple input and output FIFO queues to the microcontroller core.
+
+There are two PIO blocks with four state machines each, that can independently execute sequential programs to manipulate GPIOs and transfer data. Unlike a general-purpose processor, PIO state machines are highly specialized for IO, with a focus on determinism, precise timing, and close integration with fixed-function hardware. Each state machine and its supporting hardware occupy approximately the same silicon area as a standard serial interface block, such as an SPI or I2C controller. However, PIO state machines can be configured and reconfigured dynamically to implement numerous different interfaces.
+
+In our project, we used PIO_I2C to replace the traditional I2C protocol. There are some PIO examples that we have modified to be able to use in our project.
+```
+pio_i2c_write_blocking(pio, sm, addr, tx_bytes, 1, true);
+pio_i2c_read_blocking(pio, sm, addr, data, 6, false); 
+```
 
 ## Team overview 
 (ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages
