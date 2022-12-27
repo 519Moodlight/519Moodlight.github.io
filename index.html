@@ -1,224 +1,738 @@
-<h1 id="519moodlight-github-io">519Moodlight.github.io</h1>
-<p>All contents are written first in the README file.</p>
-<p>Contents from Canvas:</p>
-<ul>
-<li>A project showcase (brief project overview with cool photos/videos, probably on your main page).</li>
-<li>Project instructions, in enough detail that someone else could re-create your project (components used, assembly details, block diagrams, description of your RP2040 dev environment, links to your code, etc).</li>
-<li>Narrative overview of your project&#39;s development, and how it evolved from proposal to demo day (showing photos/screenshots/gifs at each stage).</li>
-<li>Any significant issues you had to troubleshoot, and how you solved them or adapted your plans (including diagrams, REPL sessions, scope traces, etc.)</li>
-<li>Reflections on your design and components/parts you selected, including advantages/disadvantages, whether you would recommend a similar design to future teams, and other design approaches/components you might try next time.</li>
-<li>A bit more detail about some feature or accomplishment you found particularly satisfying.</li>
-<li>An explanation of the PIO part of your code, including a diagram of the overal logic, as well as an introduction to the RP2040 PIO module and what makes it a unique asset for a microcontroller.</li>
-<li><p>Team overview (ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages.</p>
-</li>
-<li><p>Use your new team github organization to publish a repo containing your project code. Include a README.md file with a brief overview and block diagram of the code in this repo. </p>
-</li>
-<li>Upload all photos/videos you&#39;ve taken for project documentation (components, debugging, progress, final demos, demo day action shots), as well as your demo day slides you set up on your monitors, to this Google Drive Links to an external site.under your team folder. Send me a note if you&#39;re planning to upload more than 10GB.</li>
-</ul>
-<h2 id="project-showcase">Project Showcase</h2>
-<p>Our team aims to invent a sensing device that will measure the in-room apparent temperature by detecting room temperature and humidity. The user can customize their favoriate display mode. The device has six modes: </p>
-<ul>
-<li>Mode TMEP: shows the room temperature</li>
-<li>Mode RHUM: shows the room relative humidity</li>
-<li>Mode FEEL: shows the in-room apparent temperature, i.e. how your body feels in the room</li>
-<li>Mode FACE: shows either a smiling or crying face based on temperatuer and humidity, can be customized by the user</li>
-<li>Mode RAINBOW: shows a heat index map across all the measuing range for the sensor and indicate the &quot;location&quot; of the current measurements</li>
-<li>Mode ROLL: shows all the five modes in a rolling sequence</li>
-</ul>
-<p>All of the indications are presented on a 16x32 RGB LED matrix panel. The device is also equipped with a person detection function. When ever a human is reading the infomation on the panel, the panel will be changed to the user&#39;s favorite mode. For example, if the user prefers to see the RAINBOW mode, he/she will set the mode to their prefer mode. The next time when he/she reads the the panel, the camera will detect human activity and change the display to RAINBOW mode until they leave.</p>
-<table>
-    <tr>
-    <td> <img src="https://user-images.githubusercontent.com/105755054/209399661-72d4c804-97a8-429d-8177-e13ec1642303.JPG" alt="DSC00521" width="500" align="'"> </td>
-    <td> <img src="https://user-images.githubusercontent.com/105755054/209399679-f63e8f3c-6dd7-4774-b391-c7e45855b4cc.JPG" alt="DSC00517" width="500"> </td>
-    </tr>
-    <tr>
-    <td> <img src="https://user-images.githubusercontent.com/105755054/209399670-80a55a39-d921-40ad-bdda-d567670175ac.JPG" alt="DSC00518" width="500"> </td>
-    <td> <img src="https://user-images.githubusercontent.com/105755054/209399728-d41d9359-d014-4621-a9dd-84a485e6c4e3.JPG" alt="DSC00519" width="500"> </td>
-    </tr>
-    <tr>
-        <td> <img src="https://user-images.githubusercontent.com/105755054/209399611-c63fcece-f27d-4203-9335-e9cd4a059b81.JPG" alt="DSC00520" width="500"> </td>
-        </tr>
-    </table>
 
-
-<h2 id="project-instrcutions">Project instrcutions</h2>
-<h3 id="components-">Components:</h3>
-<ul>
-<li>Pico4ML</li>
-<li>Adafruit SHT40 </li>
-<li>Adafruit QT-PY 2040</li>
-<li>16x32 RGB LED matrix panel </li>
-<li>Arduino Uno Rev3</li>
-<li>PC/Laptop as REPL screen (Can be removed in realiife application)</li>
-<li>Resistors</li>
-<li>Adafruit Perma-Proto Half-sized Breadboard PCB</li>
-</ul>
-<h3 id="block-diagram-">Block diagram:</h3>
-<p><img src="https://user-images.githubusercontent.com/114244957/209054737-e132e7d7-39e1-4b68-8af5-1b68817cdfec.png" alt="image" width="500" height="600"></p>
-<h3 id="connection-diagram-maybe-can-be-simplified-more-combine-two-diagrams-together-">Connection diagram: [maybe can be simplified more, combine two diagrams together]</h3>
-<p><img src="https://user-images.githubusercontent.com/105755054/209586978-436b4cda-e3fc-4f70-898d-24c44655fe77.jpg" alt="Diagram -3" width="500" height="600"></p>
-<p><img src="https://user-images.githubusercontent.com/105755054/209586979-868ce4b7-8ca1-4089-a0ca-004812f5446d.jpg" alt="Diagram -4" width="500" height="600"></p>
-<h3 id="development-environment">Development environment</h3>
-<ul>
-<li>Vidusl Studio Code Version: 1.74.2
-```
-Test on: MacBook Pro (14-inch, 2021)</li>
-</ul>
-<p>Software: macOS Monterey 12.6 </p>
-<pre><code>
-<span class="hljs-selector-tag">-</span> <span class="hljs-selector-tag">Arduino</span> <span class="hljs-selector-tag">IDE</span> <span class="hljs-selector-tag">Version</span>: 1<span class="hljs-selector-class">.8</span><span class="hljs-selector-class">.20</span>
-</code></pre><p>Test on: MacBook Pro (14-inch, 2021)</p>
-<p>Software: macOS Monterey 12.6 </p>
-<pre><code>
-### Links <span class="hljs-keyword">to</span> codes
-SEE REPO. 
-
-## Project development
-### Beginning
-This the the team<span class="hljs-symbol">'s</span> initial proposal slideshow. A detialed description about the project <span class="hljs-keyword">is</span> shown <span class="hljs-keyword">in</span> the video.
-https://docs.google.com/presentation/d/<span class="hljs-number">1</span>t87cv9p3CeJUlsETCPSfEi2vsW76WDrAiFLQtDDplcw/edit?usp=sharing
-https://youtu.be/xyOEmyO56Lc
-
-### Midpoint Checkup
-This the the team<span class="hljs-symbol">'s</span> midpoint checkup slideshow. It <span class="hljs-keyword">is</span> <span class="hljs-keyword">for</span> internal <span class="hljs-keyword">use</span> during the development <span class="hljs-keyword">of</span> the project. https://docs.google.com/presentation/d/<span class="hljs-number">15</span>bB733aYIH5O1ynS-uNRryCd-YGT2AP3RCA227Z42LM/edit?usp=sharing
-
-The team has setup four midpoint checks <span class="hljs-keyword">to</span> ensure that the team have a right pace <span class="hljs-keyword">in</span> the project. The four checkput items are:
-- Pico4ML <span class="hljs-keyword">is</span> able <span class="hljs-keyword">to</span> perform person detection <span class="hljs-keyword">and</span> <span class="hljs-keyword">return</span> signals.
-- Adafruit SHT40 <span class="hljs-keyword">is</span> able <span class="hljs-keyword">to</span> <span class="hljs-keyword">return</span> humidity <span class="hljs-keyword">and</span> temperature values.
-- LCD can communicate <span class="hljs-keyword">with</span> RP2040.
-- Some kind <span class="hljs-keyword">of</span> REPL that returns sensor data.
-
-<span class="hljs-keyword">In</span> the midepoint check, the team has successfully performed person detection <span class="hljs-keyword">in</span> Pico4ML. Pico4ML produces a <span class="hljs-string">"person score"</span> that shows <span class="hljs-keyword">if</span> the detected object <span class="hljs-keyword">is</span> a person. The score <span class="hljs-keyword">range</span> from negative <span class="hljs-keyword">to</span> <span class="hljs-built_in">positive</span>. <span class="hljs-keyword">When</span> the score <span class="hljs-keyword">is</span> over <span class="hljs-number">90</span>, the detected object <span class="hljs-keyword">is</span> a person. Usually, a human <span class="hljs-keyword">in</span> a goot light <span class="hljs-keyword">and</span> backgroun environemnt will get a score at around <span class="hljs-number">110</span>. The team was thinking <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> I2C <span class="hljs-keyword">to</span> directly tansfer this <span class="hljs-string">"person score"</span> <span class="hljs-keyword">to</span> RP2040. RP2040 will do the calculation.
-
-The team has also successfully perform humidity <span class="hljs-keyword">and</span> temperature detection <span class="hljs-keyword">in</span> SHT40. THe sensor can have a directly communication <span class="hljs-keyword">with</span> the RP2040 using PIO. More detailed discription about using PIO <span class="hljs-keyword">is</span> discussed <span class="hljs-keyword">in</span> the later section. However, the team realized that using a LCD as the display cannot give <span class="hljs-keyword">out</span> the most infomation. Since our project highly rely <span class="hljs-keyword">on</span> the heat index <span class="hljs-keyword">map</span> (shown below). Our instructor gave the advice that the team should inplement the heat <span class="hljs-keyword">map</span> <span class="hljs-keyword">to</span> the display. LCD would <span class="hljs-keyword">not</span> be sufficient. Thus, <span class="hljs-keyword">after</span> discussion, the team has decided <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> a <span class="hljs-number">16</span>x32 RGB LED matrix panel as the final display.
-
-![image](https://user-images.githubusercontent.com/<span class="hljs-number">114244957</span>/<span class="hljs-number">209482149</span>-<span class="hljs-number">3001</span>af36-f5fa-<span class="hljs-number">468</span>c-a7f0-c49ae5233d5d.png)
-
-The team always had REPL <span class="hljs-keyword">to</span> indicate the chip <span class="hljs-keyword">process</span> <span class="hljs-keyword">and</span> data <span class="hljs-keyword">return</span>.
-
-### Final Design
-This <span class="hljs-keyword">is</span> the team<span class="hljs-symbol">'s</span> final demo day slideshow. It was initally <span class="hljs-keyword">in</span> slides. During the demo day, it was changed <span class="hljs-keyword">to</span> a single page poster.
-https://docs.google.com/presentation/d/<span class="hljs-number">1</span>gsq2rLiZDhrBSmuCHu-VE6WdknTC6gEK/edit?usp=sharing&amp;ouid=<span class="hljs-number">117714499329064750219</span>&amp;rtpof=<span class="hljs-literal">true</span>&amp;sd=<span class="hljs-literal">true</span>
-
-<span class="hljs-keyword">After</span> a more detailed look at the RP2040 pins, the team realized that they don<span class="hljs-symbol">'t</span> have enough pins <span class="hljs-keyword">to</span> achieve more complex communication. Thus, the team has simplified the communication method. Instead <span class="hljs-keyword">of</span> useing I2C <span class="hljs-keyword">to</span> communciate between Pico4ML <span class="hljs-keyword">and</span> RP2040, the team has chosen <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> ```GPIO``` high <span class="hljs-keyword">and</span> low voltage as the <span class="hljs-keyword">signal</span>. 
-
-During the final stage, the team ensured that <span class="hljs-keyword">all</span> the modules are working individually. The team<span class="hljs-symbol">'s</span> main focus was <span class="hljs-keyword">on</span> the communication. The team<span class="hljs-symbol">'s</span> initial plan was <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> two QTPY boards <span class="hljs-keyword">to</span> communicate. One would be responsible <span class="hljs-keyword">for</span> getting the sensor data, the other would be the MAIN board that collects <span class="hljs-keyword">all</span> the information <span class="hljs-keyword">and</span> intergrate the together. <span class="hljs-keyword">After</span> discussion, the team realized that one single board can finish <span class="hljs-keyword">all</span> the work. Since the communication <span class="hljs-keyword">process</span> has been simplified, Pico4ML <span class="hljs-keyword">and</span> QTPY will only communicate using one GPIO pin. The <span class="hljs-keyword">new</span> RGB LED matrix will have <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> an Arduino board. The communication between Arduino <span class="hljs-keyword">and</span> QTPY <span class="hljs-keyword">is</span> UART.
-
-## Reflections
-Design &amp; components selection
-The team<span class="hljs-symbol">'s</span> initial design <span class="hljs-keyword">is</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> two QTPY <span class="hljs-number">2040</span> <span class="hljs-keyword">and</span> one Pico4ML. It was designed so that the project would be highly <span class="hljs-string">"modulized"</span>. Each teammate could work <span class="hljs-keyword">on</span> their own componenet without interference. However, this design would reqiure a lot <span class="hljs-keyword">of</span> communication among three boards. The power consumption would also be high. During project development, the team has changed their stagertgy <span class="hljs-keyword">to</span> intergate <span class="hljs-keyword">all</span> functions <span class="hljs-keyword">to</span> as few hardwares as possible. There are two reasons:
-
-<span class="hljs-number">1</span>. The team has change from LCD display <span class="hljs-keyword">to</span> a larger LED display. The larger LED display will be more visible from long distance <span class="hljs-keyword">and</span> contains more infomation. <span class="hljs-keyword">To</span> implement the display, the team used an Arduino Uno Rev3. This increased the number <span class="hljs-keyword">of</span> boards <span class="hljs-keyword">in</span> the system. Thus, the team decided <span class="hljs-keyword">to</span> reduce one QTPY <span class="hljs-number">2040</span> <span class="hljs-keyword">to</span> simplify the system.
-
-<span class="hljs-number">2</span>. The device was designed <span class="hljs-keyword">to</span> be mounted <span class="hljs-keyword">on</span> the wall. The team would like <span class="hljs-keyword">to</span> reduce the weight <span class="hljs-keyword">and</span> size <span class="hljs-keyword">of</span> the device <span class="hljs-keyword">to</span> make it more compact.
-
-## Feature Highlights
-- Transfer Humidity <span class="hljs-keyword">and</span> Temperature values <span class="hljs-keyword">in</span> QTPY2040 <span class="hljs-keyword">to</span> Arduino Uno Rev3 using UART
-
-[need code]
-
-- Vivid graphic display using LED matrix
-
-- <span class="hljs-number">6</span> models display control <span class="hljs-comment">-- humidity adjust, temperature adjust, feeling temperature, visualization (specific face patterns), rainbow (10 colors to show different humidity and temperature), DEMO (being able to control HUMIDITY ADJUST &amp; TEMPERATURE ADJUST)</span>
-
-[demo code <span class="hljs-keyword">in</span> C]
-
-
-## PIO <span class="hljs-keyword">in</span> <span class="hljs-keyword">use</span>
-- I2C communication protocol base <span class="hljs-keyword">on</span> PIO 
-
-- Basic Pseudo Code <span class="hljs-keyword">of</span> SH4X Temp.&amp;Humidity Sensor <span class="hljs-keyword">with</span> I2C Protocol
-
-![Screen Shot <span class="hljs-number">2022</span>-<span class="hljs-number">12</span>-<span class="hljs-number">23</span> at <span class="hljs-number">14</span> <span class="hljs-number">57</span> <span class="hljs-number">51</span>](https://user-images.githubusercontent.com/<span class="hljs-number">105755054</span>/<span class="hljs-number">209400650</span>-<span class="hljs-number">359622</span>ef-bf4a-<span class="hljs-number">4e53</span>-b3c9-<span class="hljs-number">4</span>f99f7749005.png)
-
-![Screen Shot <span class="hljs-number">2022</span>-<span class="hljs-number">12</span>-<span class="hljs-number">23</span> at <span class="hljs-number">15</span> <span class="hljs-number">09</span> <span class="hljs-number">40</span>](https://user-images.githubusercontent.com/<span class="hljs-number">105755054</span>/<span class="hljs-number">209401537</span>-<span class="hljs-number">53491948</span>-e8ca-<span class="hljs-number">4</span>f8b-a470-d835c4b929f1.png)
-
-
-- SHT4X Hearder
-</code></pre><p>#ifndef SHT4X_H</p>
-<p>#define SHT4X_H</p>
-<p>#include <stdio.h></p>
-<p>#include &quot;pico/stdlib.h&quot;</p>
-<p>#include &quot;pico/binary_info.h&quot;</p>
-<p>#include &quot;pio_i2c.h&quot;</p>
-<p>void read_temp_hum(int32_t <em>temp, int32_t </em>hum, PIO pio, uint sm, uint32_t addr);</p>
-<p>#endif</p>
-<pre><code>-  SHT4X C <span class="hljs-keyword">code</span> <span class="hljs-keyword">with</span> Explaination
-</code></pre><p>#include <stdio.h></p>
-<p>#include &quot;pico/stdlib.h&quot;</p>
-<p>#include &quot;pico/binary_info.h&quot;</p>
-<p>#include &quot;pio_i2c.h&quot;</p>
-<p>#include <math.h></p>
-<p>//enable the sensor and measure temp. and hum.</p>
-<p>#define INIT_CONFIG 0xFD </p>
-<p>//address of sht40
-const int addr = 0x44; </p>
-<p>#define SDA 22</p>
-<p>#define SCL 23</p>
-<p>//using PIO0 and SM0 as I2C trasimission 
-PIO pio = pio0; 
-uint sm = 0;</p>
-<p>void read_temp_hum(int32_t <em>temp, int32_t </em>hum, PIO pio, uint sm, uint32_t addr){</p>
-<pre><code><span class="hljs-comment">//create an empty array for storing the starting-comment of SH4X</span>
-uint8_t tx_bytes[<span class="hljs-number">1</span>];  
-
-<span class="hljs-comment">//create an empty array for storing the data reading from the I2C data parts</span>
-uint8_t data[<span class="hljs-number">6</span>];
-
-<span class="hljs-comment">//Transmit the starting comment to SH4X sensor via I2C writing</span>
-tx_bytes[<span class="hljs-number">0</span>] = INIT_CONFIG;
-pio_i2c_write_blocking(pio, sm, addr, tx_bytes, <span class="hljs-number">1</span>, true);
-sleep_ms(<span class="hljs-number">10</span>);
-
-<span class="hljs-comment">//Read data from the I2C slaver with 6 Bytes each period</span>
-pio_i2c_read_blocking(pio, sm, addr, data, <span class="hljs-number">6</span>, false); 
-
-<span class="hljs-comment">//combine the raw-temperature data togeter</span>
-int raw_temperature = data[<span class="hljs-number">0</span>]*<span class="hljs-number">256</span> + data[<span class="hljs-number">1</span>]; 
-
-<span class="hljs-comment">//combine the raw-humidity data </span>
-int raw_humidity = data[<span class="hljs-number">3</span>]*<span class="hljs-number">256</span> + data[<span class="hljs-number">4</span>];
-
-<span class="hljs-comment">//covert the raw data to readable temperatire and humidity</span>
-<span class="hljs-type">float</span> termperature = ((<span class="hljs-number">175</span> * (raw_temperature/<span class="hljs-number">65536.00</span>)) - <span class="hljs-number">45.00</span>);
-<span class="hljs-type">float</span> humidity = ((<span class="hljs-number">125</span> * (raw_temperature/<span class="hljs-number">65536.00</span>)) - <span class="hljs-number">6.00</span>);
-
-<span class="hljs-comment">//return the termperture and humidity with integers</span>
-*temp = termperature;
-*hum = humidity;
-</code></pre><p>}</p>
-<pre><code><span class="hljs-comment">### Diagram of the overal logic</span>
-- Functional Block Diagram <span class="hljs-keyword">of</span> SH4X Sensor 
-
-![Screen Shot <span class="hljs-number">2022</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span> <span class="hljs-keyword">at</span> <span class="hljs-number">15</span> <span class="hljs-number">14</span> <span class="hljs-number">31</span>](<span class="hljs-keyword">https</span>://user-images.githubusercontent.com/<span class="hljs-number">105755054</span>/<span class="hljs-number">209403700</span><span class="hljs-number">-2</span>b47f540-c5d8<span class="hljs-number">-4</span>c41-a90c<span class="hljs-number">-52999</span>b19417e.png)
-
-
-- QTPY2040 <span class="hljs-keyword">and</span> SHT40 <span class="hljs-keyword">with</span> I2C
-
-![Screen Shot <span class="hljs-number">2022</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span> <span class="hljs-keyword">at</span> <span class="hljs-number">15</span> <span class="hljs-number">38</span> <span class="hljs-number">48</span>](<span class="hljs-keyword">https</span>://user-images.githubusercontent.com/<span class="hljs-number">105755054</span>/<span class="hljs-number">209403649</span>-c859e95d<span class="hljs-number">-843</span>f<span class="hljs-number">-4192</span>-a022<span class="hljs-number">-69</span>d03cebf5af.png)
-
-
-<span class="hljs-comment">### Introduction to the RP2040 PIO module</span>
-One unique feature <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> RP2040 microcontroller <span class="hljs-built_in">from</span> <span class="hljs-keyword">the</span> Raspberry Pi Foundation is its Programmable I/O (PIO) peripheral. The focus <span class="hljs-keyword">of</span> PIO is serial communication. Most microcontrollers have hardware support <span class="hljs-keyword">for</span> popular serial protocols such <span class="hljs-keyword">as</span> I²C, SPI, <span class="hljs-keyword">and</span> UART. However, this hardware support is always limited both <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> serial interfaces <span class="hljs-keyword">and</span> <span class="hljs-keyword">the</span> types <span class="hljs-keyword">of</span> serial interfaces that can be used, such <span class="hljs-keyword">as</span> Arduino uno Rev3 only having <span class="hljs-number">1</span> UART port. If you have <span class="hljs-keyword">a</span> non-standard serial interface you need <span class="hljs-built_in">to</span> support, you may have <span class="hljs-built_in">to</span> resort <span class="hljs-built_in">to</span> bit-banging I/O pins <span class="hljs-built_in">to</span> implement <span class="hljs-keyword">it</span>, tying up <span class="hljs-keyword">the</span> microcontroller core <span class="hljs-built_in">to</span> <span class="hljs-built_in">get</span> <span class="hljs-keyword">the</span> timing <span class="hljs-literal">right</span>. PIO aims <span class="hljs-built_in">to</span> solve this problem <span class="hljs-keyword">by</span> providing <span class="hljs-keyword">a</span> highly configurable, programmable I/O peripheral that will take care <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> bit-banging <span class="hljs-keyword">and</span> provide simple input <span class="hljs-keyword">and</span> output FIFO queues <span class="hljs-built_in">to</span> <span class="hljs-keyword">the</span> microcontroller core.
-
-There are <span class="hljs-literal">two</span> PIO blocks <span class="hljs-keyword">with</span> <span class="hljs-literal">four</span> state machines <span class="hljs-keyword">each</span>, that can independently execute sequential programs <span class="hljs-built_in">to</span> manipulate GPIOs <span class="hljs-keyword">and</span> transfer data. Unlike <span class="hljs-keyword">a</span> general-purpose processor, PIO state machines are highly specialized <span class="hljs-keyword">for</span> IO, <span class="hljs-keyword">with</span> <span class="hljs-keyword">a</span> focus <span class="hljs-keyword">on</span> <span class="hljs-title">determinism</span>, <span class="hljs-title">precise</span> <span class="hljs-title">timing</span>, <span class="hljs-title">and</span> <span class="hljs-title">close</span> <span class="hljs-title">integration</span> <span class="hljs-title">with</span> <span class="hljs-title">fixed-function</span> <span class="hljs-title">hardware</span>. <span class="hljs-title">Each</span> <span class="hljs-title">state</span> <span class="hljs-title">machine</span> <span class="hljs-title">and</span> <span class="hljs-title">its</span> <span class="hljs-title">supporting</span> <span class="hljs-title">hardware</span> <span class="hljs-title">occupy</span> <span class="hljs-title">approximately</span> <span class="hljs-title">the</span> <span class="hljs-title">same</span> <span class="hljs-title">silicon</span> <span class="hljs-title">area</span> <span class="hljs-title">as</span> <span class="hljs-title">a</span> <span class="hljs-title">standard</span> <span class="hljs-title">serial</span> <span class="hljs-title">interface</span> <span class="hljs-title">block</span>, <span class="hljs-title">such</span> <span class="hljs-title">as</span> <span class="hljs-title">an</span> <span class="hljs-title">SPI</span> <span class="hljs-title">or</span> <span class="hljs-title">I2C</span> <span class="hljs-title">controller</span>. <span class="hljs-title">However</span>, <span class="hljs-title">PIO</span> <span class="hljs-title">state</span> <span class="hljs-title">machines</span> <span class="hljs-title">can</span> <span class="hljs-title">be</span> <span class="hljs-title">configured</span> <span class="hljs-title">and</span> <span class="hljs-title">reconfigured</span> <span class="hljs-title">dynamically</span> <span class="hljs-title">to</span> <span class="hljs-title">implement</span> <span class="hljs-title">numerous</span> <span class="hljs-title">different</span> <span class="hljs-title">interfaces</span>.
-
-In our project, we used PIO_I2C <span class="hljs-built_in">to</span> <span class="hljs-built_in">replace</span> <span class="hljs-keyword">the</span> traditional I2C protocol. There are some PIO examples that we have modified <span class="hljs-built_in">to</span> be able <span class="hljs-built_in">to</span> use <span class="hljs-keyword">in</span> our project.
-</code></pre><p>pio_i2c_write_blocking(pio, sm, addr, tx_bytes, 1, true);
-pio_i2c_read_blocking(pio, sm, addr, data, 6, false); 
-```</p>
-<h2 id="team-overview">Team overview</h2>
-<p>(ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages</p>
-<ul>
-<li>Katrina Ji</li>
-</ul>
-<p>Personal github: <a href="https://github.com/katrinaji">https://github.com/katrinaji</a></p>
-<p>Email: katji@seas.upenn.edu</p>
-<ul>
-<li>Yuchen Wang</li>
-</ul>
-<p>Personal github: wangybv@seas.upenn.edu</p>
-<ul>
-<li>Chongyuan Zhang</li>
-</ul>
-<p>Email: zcy6@seas.upenn.edu</p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ESE 5190 Moodlight</title><style>
+    /* cspell:disable-file */
+    /* webkit printing magic: print all background colors */
+    html {
+        -webkit-print-color-adjust: exact;
+    }
+    * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    @media only screen {
+        body {
+            margin: 2em auto;
+            max-width: 900px;
+            color: rgb(55, 53, 47);
+        }
+    }
+    
+    body {
+        line-height: 1.5;
+        white-space: pre-wrap;
+    }
+    
+    a,
+    a.visited {
+        color: inherit;
+        text-decoration: underline;
+    }
+    
+    .pdf-relative-link-path {
+        font-size: 80%;
+        color: #444;
+    }
+    
+    h1,
+    h2,
+    h3 {
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.75em;
+    }
+    
+    h1 {
+        font-size: 1.875rem;
+        margin-top: 1.875rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+    }
+    
+    .source {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 1.5em;
+        word-break: break-all;
+    }
+    
+    .callout {
+        border-radius: 3px;
+        padding: 1rem;
+    }
+    
+    figure {
+        margin: 1.25em 0;
+        page-break-inside: avoid;
+    }
+    
+    figcaption {
+        opacity: 0.5;
+        font-size: 85%;
+        margin-top: 0.5em;
+    }
+    
+    mark {
+        background-color: transparent;
+    }
+    
+    .indented {
+        padding-left: 1.5em;
+    }
+    
+    hr {
+        background: transparent;
+        display: block;
+        width: 100%;
+        height: 1px;
+        visibility: visible;
+        border: none;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+    }
+    
+    img {
+        max-width: 100%;
+    }
+    
+    @media only print {
+        img {
+            max-height: 100vh;
+            object-fit: contain;
+        }
+    }
+    
+    @page {
+        margin: 1in;
+    }
+    
+    .collection-content {
+        font-size: 0.875rem;
+    }
+    
+    .column-list {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .column {
+        padding: 0 1em;
+    }
+    
+    .column:first-child {
+        padding-left: 0;
+    }
+    
+    .column:last-child {
+        padding-right: 0;
+    }
+    
+    .table_of_contents-item {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.3;
+        padding: 0.125rem;
+    }
+    
+    .table_of_contents-indent-1 {
+        margin-left: 1.5rem;
+    }
+    
+    .table_of_contents-indent-2 {
+        margin-left: 3rem;
+    }
+    
+    .table_of_contents-indent-3 {
+        margin-left: 4.5rem;
+    }
+    
+    .table_of_contents-link {
+        text-decoration: none;
+        opacity: 0.7;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+    }
+    
+    table,
+    th,
+    td {
+        border: 1px solid rgba(55, 53, 47, 0.09);
+        border-collapse: collapse;
+    }
+    
+    table {
+        border-left: none;
+        border-right: none;
+    }
+    
+    th,
+    td {
+        font-weight: normal;
+        padding: 0.25em 0.5em;
+        line-height: 1.5;
+        min-height: 1.5em;
+        text-align: left;
+    }
+    
+    th {
+        color: rgba(55, 53, 47, 0.6);
+    }
+    
+    ol,
+    ul {
+        margin: 0;
+        margin-block-start: 0.6em;
+        margin-block-end: 0.6em;
+    }
+    
+    li > ol:first-child,
+    li > ul:first-child {
+        margin-block-start: 0.6em;
+    }
+    
+    ul > li {
+        list-style: disc;
+    }
+    
+    ul.to-do-list {
+        text-indent: -1.7em;
+    }
+    
+    ul.to-do-list > li {
+        list-style: none;
+    }
+    
+    .to-do-children-checked {
+        text-decoration: line-through;
+        opacity: 0.375;
+    }
+    
+    ul.toggle > li {
+        list-style: none;
+    }
+    
+    ul {
+        padding-inline-start: 1.7em;
+    }
+    
+    ul > li {
+        padding-left: 0.1em;
+    }
+    
+    ol {
+        padding-inline-start: 1.6em;
+    }
+    
+    ol > li {
+        padding-left: 0.2em;
+    }
+    
+    .mono ol {
+        padding-inline-start: 2em;
+    }
+    
+    .mono ol > li {
+        text-indent: -0.4em;
+    }
+    
+    .toggle {
+        padding-inline-start: 0em;
+        list-style-type: none;
+    }
+    
+    /* Indent toggle children */
+    .toggle > li > details {
+        padding-left: 1.7em;
+    }
+    
+    .toggle > li > details > summary {
+        margin-left: -1.1em;
+    }
+    
+    .selected-value {
+        display: inline-block;
+        padding: 0 0.5em;
+        background: rgba(206, 205, 202, 0.5);
+        border-radius: 3px;
+        margin-right: 0.5em;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+        white-space: nowrap;
+    }
+    
+    .collection-title {
+        display: inline-block;
+        margin-right: 1em;
+    }
+    
+    .simple-table {
+        margin-top: 1em;
+        font-size: 0.875rem;
+        empty-cells: show;
+    }
+    .simple-table td {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table th {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table-header-color {
+        background: rgb(247, 246, 243);
+        color: black;
+    }
+    .simple-table-header {
+        font-weight: 500;
+    }
+    
+    time {
+        opacity: 0.5;
+    }
+    
+    .icon {
+        display: inline-block;
+        max-width: 1.2em;
+        max-height: 1.2em;
+        text-decoration: none;
+        vertical-align: text-bottom;
+        margin-right: 0.5em;
+    }
+    
+    img.icon {
+        border-radius: 3px;
+    }
+    
+    .user-icon {
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 100%;
+        margin-right: 0.5rem;
+    }
+    
+    .user-icon-inner {
+        font-size: 0.8em;
+    }
+    
+    .text-icon {
+        border: 1px solid #000;
+        text-align: center;
+    }
+    
+    .page-cover-image {
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        max-height: 30vh;
+    }
+    
+    .page-header-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .page-header-icon-with-cover {
+        margin-top: -0.72em;
+        margin-left: 0.07em;
+    }
+    
+    .page-header-icon img {
+        border-radius: 3px;
+    }
+    
+    .link-to-page {
+        margin: 1em 0;
+        padding: 0;
+        border: none;
+        font-weight: 500;
+    }
+    
+    p > .user {
+        opacity: 0.5;
+    }
+    
+    td > .user,
+    td > time {
+        white-space: nowrap;
+    }
+    
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        margin-right: 0.6em;
+        vertical-align: middle;
+    }
+    
+    p {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+    
+    .image {
+        border: none;
+        margin: 1.5em 0;
+        padding: 0;
+        border-radius: 0;
+        text-align: center;
+    }
+    
+    .code,
+    code {
+        background: rgba(135, 131, 120, 0.15);
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 85%;
+        tab-size: 2;
+    }
+    
+    code {
+        color: #eb5757;
+    }
+    
+    .code {
+        padding: 1.5em 1em;
+    }
+    
+    .code-wrap {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+    
+    .code > code {
+        background: none;
+        padding: 0;
+        font-size: 100%;
+        color: inherit;
+    }
+    
+    blockquote {
+        font-size: 1.25em;
+        margin: 1em 0;
+        padding-left: 1em;
+        border-left: 3px solid rgb(55, 53, 47);
+    }
+    
+    .bookmark {
+        text-decoration: none;
+        max-height: 8em;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+    }
+    
+    .bookmark-title {
+        font-size: 0.85em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 1.75em;
+        white-space: nowrap;
+    }
+    
+    .bookmark-text {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .bookmark-info {
+        flex: 4 1 180px;
+        padding: 12px 14px 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .bookmark-image {
+        width: 33%;
+        flex: 1 1 180px;
+        display: block;
+        position: relative;
+        object-fit: cover;
+        border-radius: 1px;
+    }
+    
+    .bookmark-description {
+        color: rgba(55, 53, 47, 0.6);
+        font-size: 0.75em;
+        overflow: hidden;
+        max-height: 4.5em;
+        word-break: break-word;
+    }
+    
+    .bookmark-href {
+        font-size: 0.75em;
+        margin-top: 0.25em;
+    }
+    
+    .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+    .code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+    .serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+    .mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+    .pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+    .pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+    .pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+    .pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+    .pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+    .pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+    .pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+    .pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+    .pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .highlight-default {
+        color: rgba(55, 53, 47, 1);
+    }
+    .highlight-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .highlight-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .highlight-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .highlight-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .highlight-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .highlight-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .highlight-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .highlight-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .highlight-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .highlight-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .highlight-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .highlight-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .highlight-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .highlight-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .highlight-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .highlight-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .highlight-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .highlight-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .block-color-default {
+        color: inherit;
+        fill: inherit;
+    }
+    .block-color-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .block-color-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .block-color-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .block-color-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .block-color-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .block-color-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .block-color-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .block-color-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .block-color-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .block-color-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .block-color-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .block-color-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .block-color-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .block-color-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .block-color-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .block-color-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .block-color-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .block-color-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+    .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+    .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+    .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+    .select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+    .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+    .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+    .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+    .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+    .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+    
+    .checkbox {
+        display: inline-flex;
+        vertical-align: text-bottom;
+        width: 16;
+        height: 16;
+        background-size: 16px;
+        margin-left: 2px;
+        margin-right: 5px;
+    }
+    
+    .checkbox-on {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+    
+    .checkbox-off {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+        
+    </style></head><body><article id="d6cbff7f-ab4a-4897-9ddd-f79c7b71d19d" class="page sans"><header><h1 class="page-title">ESE 5190 Moodlight</h1></header><div class="page-body"><nav id="b8201181-40ba-45a6-8e39-912e7b82ee8f" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d99608a5-85b6-4f7d-89c2-0bde3793a154"><mark class="highlight-orange">Team overview</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b8be7cc9-90a9-4498-9618-6cf032bd8d5a"><mark class="highlight-orange">Project Showcase</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#60dae99d-4375-40a7-a7c6-68f99fdaf25f"><mark class="highlight-orange">Project instructions</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5ba161c5-277d-4d1c-b4ab-2648015e9f39">Components:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#227342bd-d421-440e-8dd7-5611c57ef9e6">Block diagram:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1e99790e-ce54-4791-b49b-afbd646e6eb5">Connection diagram: [maybe can be simplified more, combine two diagrams together]</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bedc6e80-e949-4f83-82a5-2bf9f8521da5">Development environment</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a77df95c-58d5-4013-aa8a-dba0cfa74827">Links to codes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b69cddd2-2ae0-417f-a1a6-cb3f69653331"><mark class="highlight-orange">Project development</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8722d289-9ca3-4a46-818e-07a035091e2e">Beginning</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5128e6db-c5d4-48ea-9387-25d562ed1d05">Midpoint Checkup</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#69362823-6a68-4636-b51f-4bc30a19307f">Final Design</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#885c2521-be78-440d-8295-9b8e23e53539"><mark class="highlight-orange">Reflections</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#91e9ae0b-d676-46c0-89a2-897a6e53f0b3"><mark class="highlight-orange">Feature Highlights</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#eb169e8d-b5fb-4314-9733-59869c9115a1"><mark class="highlight-orange">PIO in use</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cf08ef12-d2d6-4da2-b6dd-fb6694df76dc">Diagram of the overall logic</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f54c1550-9007-4882-96a8-b338c455e17b"><mark class="highlight-orange">Introduction to the RP2040 PIO module</mark></a></div></nav><hr id="d4fca169-e3fb-4b87-9365-8f9f0acb36b1"/><h2 id="d99608a5-85b6-4f7d-89c2-0bde3793a154" class=""><mark class="highlight-orange">Team overview</mark></h2><ul id="018a3e1c-033b-45e2-a125-665748c97a59" class="toggle"><li><details open=""><summary>Katrina Ji</summary><p id="4f4e9f9a-5476-444b-bbca-56cb49f8820d" class="">Github: </p><figure id="ccad7cb5-8fc7-42ff-9747-2eb927d1f2e7"><a href="https://github.com/katrinaji" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">katrinaji - Overview</div><div class="bookmark-description">You can&#x27;t perform that action at this time. You signed in with another tab or window. You signed out in another tab or window. Reload to refresh your session. Reload to refresh your session.</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/katrinaji</div></div><img src="https://avatars.githubusercontent.com/u/114244957?v=4?s=400" class="bookmark-image"/></a></figure><p id="88e71a5f-23ad-4333-adc1-02c0634e6b65" class="">Email: katji@seas.upenn.edu</p></details></li></ul><ul id="78e4863e-556e-4dea-8e39-db2d321e0bd3" class="toggle"><li><details open=""><summary>Yuchen Wang</summary><p id="6f13a603-71e0-4b27-b7fb-68e7df2e0068" class="">Github:</p><figure id="7ab9448f-9c95-443a-87b7-e8174f4860c0"><a href="https://github.com/YuchenWang0303" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">YuchenWang0303 - Overview</div><div class="bookmark-description">You can&#x27;t perform that action at this time. You signed in with another tab or window. You signed out in another tab or window. Reload to refresh your session. Reload to refresh your session.</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/YuchenWang0303</div></div><img src="https://avatars.githubusercontent.com/u/105755054?v=4?s=400" class="bookmark-image"/></a></figure><p id="d0907c55-c8a0-4658-b011-c125d34f369a" class="">Email: wangybv@seas.upenn.edu</p></details></li></ul><ul id="d70bc0d5-053b-4181-a781-410537000a67" class="toggle"><li><details open=""><summary>Chongyang Zhang</summary><p id="ca5be32e-321a-42ff-83bf-fa7bea6a3bcc" class="">Github:</p><figure id="fb7a8428-96f2-4154-9086-d1f2a235dea8"><a href="https://github.com/Ryan66666" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ryan66666 - Overview</div><div class="bookmark-description">You can&#x27;t perform that action at this time. You signed in with another tab or window. You signed out in another tab or window. Reload to refresh your session. Reload to refresh your session.</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/Ryan66666</div></div><img src="https://avatars.githubusercontent.com/u/114255407?v=4?s=400" class="bookmark-image"/></a></figure><p id="07933d15-5b34-4ec1-9130-981842647d5b" class="">Email: zcy6@seas.upenn.edu</p></details></li></ul><h2 id="b8be7cc9-90a9-4498-9618-6cf032bd8d5a" class=""><mark class="highlight-orange">Project Showcase</mark></h2><p id="88536562-f418-43ce-aec1-a3896dcd52ef" class="">Our team aims to invent a sensing device that will measure the in-room apparent temperature by detecting room temperature and humidity. The user can customize their favorite display mode. The device has six modes: </p><div id="59007ebc-aef0-4b6b-85b0-e433b50fbb1e" class="column-list"><div id="20dffe1c-ecb2-44b8-b6b4-a7946dd27247" style="width:50%" class="column"><ul id="05222958-6ae5-4460-96d6-4a3c4fe62df3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Mode TMEP: shows the room temperature </mark></li></ul><ul id="1cf99dfb-bf7b-4da8-86b5-80a60aa80901" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Mode RHUM: shows the room relative humidity </mark></li></ul><ul id="82c43849-fdcd-4ad4-9170-8bc3791e2e46" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Mode FEEL: shows the in-room apparent temperature, i.e. how your body feels in the room </mark></li></ul><ul id="752c676a-f1dd-45c8-ba4c-128236f98c7b" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Mode FACE: shows either a smiling or crying face based on temperature and humidity, can be customized by the user </mark></li></ul><p id="0d488811-11c6-4300-9068-cffae7365bed" class="">
+    </p></div><div id="12134ee0-d0fa-4384-847f-a6811be1ef8e" style="width:50%" class="column"><ul id="516c9d12-32f6-40c8-9c76-e301729d7ada" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Mode RAINBOW: shows a heat index map across all the measuring range for the sensor and indicate the “location” of the current measurements </mark></li></ul><ul id="46fae594-62c9-4c81-88d4-04447c1ff3fe" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Mode ROLL: shows all the five modes in a rolling sequence</mark></li></ul><p id="ff93e9e7-76b6-4d86-aad3-589eacefe58a" class="">
+    </p></div></div><p id="2a5cf8d1-402f-4dd4-a050-5d52918a8f3b" class="">All of the indications are presented on a 16x32 RGB LED matrix panel. The device is also equipped with a person detection function. When ever a human is reading the information on the panel, the panel will be changed to the user’s favorite mode. For example, if the user prefers to see the RAINBOW mode, he/she will set the mode to their prefer mode. The next time when he/she reads the the panel, the camera will detect human activity and change the display to RAINBOW mode until they leave.</p><div id="a570552e-96a1-4f36-8c4e-64a28a37cc20" class="column-list"><div id="0a380624-dd1e-4c8e-bbcf-972d9fc33c8d" style="width:50%" class="column"><figure id="6811ce13-9d37-4924-b2a8-9b19c818fd1a" class="image"><a href="https://user-images.githubusercontent.com/105755054/209399661-72d4c804-97a8-429d-8177-e13ec1642303.JPG"><img src="https://user-images.githubusercontent.com/105755054/209399661-72d4c804-97a8-429d-8177-e13ec1642303.JPG"/></a></figure></div><div id="7e41c080-b8b7-4de6-a8cd-b6070f944e40" style="width:50%" class="column"><figure id="028f1c6d-fad7-4aba-9912-ad13dd91f020" class="image"><a href="https://user-images.githubusercontent.com/105755054/209399679-f63e8f3c-6dd7-4774-b391-c7e45855b4cc.JPG"><img src="https://user-images.githubusercontent.com/105755054/209399679-f63e8f3c-6dd7-4774-b391-c7e45855b4cc.JPG"/></a></figure></div></div><div id="5260d303-ac34-47fb-94b9-045f5640681f" class="column-list"><div id="567db367-744c-4514-840c-c86ac149abd4" style="width:50%" class="column"><figure id="898b819e-ba13-47f5-a5c2-e2dc283012cb" class="image"><a href="https://user-images.githubusercontent.com/105755054/209399670-80a55a39-d921-40ad-bdda-d567670175ac.JPG"><img src="https://user-images.githubusercontent.com/105755054/209399670-80a55a39-d921-40ad-bdda-d567670175ac.JPG"/></a></figure></div><div id="fd4af401-f254-473b-9652-caf6d294cd89" style="width:50%" class="column"><figure id="5dd9cfe1-b71b-4e8b-9b76-80e25a1edc08" class="image"><a href="https://user-images.githubusercontent.com/105755054/209399728-d41d9359-d014-4621-a9dd-84a485e6c4e3.JPG"><img src="https://user-images.githubusercontent.com/105755054/209399728-d41d9359-d014-4621-a9dd-84a485e6c4e3.JPG"/></a></figure></div></div><figure id="d8aecf5d-0044-46c2-b22e-44cf3af509fe" class="image"><a href="https://user-images.githubusercontent.com/105755054/209399611-c63fcece-f27d-4203-9335-e9cd4a059b81.JPG"><img style="width:720px" src="https://user-images.githubusercontent.com/105755054/209399611-c63fcece-f27d-4203-9335-e9cd4a059b81.JPG"/></a></figure><hr id="9954d083-b95c-410d-ae5e-13db85729163"/><h2 id="60dae99d-4375-40a7-a7c6-68f99fdaf25f" class=""><mark class="highlight-orange">Project instructions</mark></h2><h3 id="5ba161c5-277d-4d1c-b4ab-2648015e9f39" class="">Components:</h3><div id="a8ad603c-bb18-4eb6-9d3c-8976ce7b7118" class="column-list"><div id="1943f872-1160-4e44-9607-281eb17605aa" style="width:50%" class="column"><ul id="696997af-ff15-4e96-b1f6-b68d37021d60" class="bulleted-list"><li style="list-style-type:disc">Pico4ML</li></ul><ul id="38bf72fd-d8d0-4cb8-816d-a116de328f99" class="bulleted-list"><li style="list-style-type:disc">Adafruit SHT40</li></ul><ul id="b5ab99a4-973f-485b-a7a9-c7d2f5864053" class="bulleted-list"><li style="list-style-type:disc">Adafruit QT-PY 2040</li></ul><ul id="d37a05cf-aa8c-4710-b819-7e67e0c15026" class="bulleted-list"><li style="list-style-type:disc">Arduino Uno Rev3</li></ul><p id="76a0afe1-ffcb-4b19-a8d8-c2b7cf729a22" class="">
+    </p></div><div id="f420f8d6-4010-4360-ab29-c05b226421d6" style="width:49.99999999999999%" class="column"><ul id="cadca539-6cee-497b-8bd9-d066748c9c5e" class="bulleted-list"><li style="list-style-type:disc">PC/Laptop as REPL screen (Can be removed in real life application)</li></ul><ul id="1d38fb3e-55d8-486c-979e-fd0ec0e4cded" class="bulleted-list"><li style="list-style-type:disc">Adafruit Perma-Proto Half-sized Breadboard PCB</li></ul><ul id="f5519334-b8c2-4e28-b0ff-ad57659d9047" class="bulleted-list"><li style="list-style-type:disc">16x32 RGB LED matrix panel</li></ul><p id="0f489246-4625-44ac-a145-445e0d1590a0" class="">
+    </p></div></div><h3 id="227342bd-d421-440e-8dd7-5611c57ef9e6" class="">Block diagram:</h3><figure id="3fc09ff1-088e-40ae-8d0d-56fab5cecc19" class="image"><a href="https://user-images.githubusercontent.com/114244957/209054737-e132e7d7-39e1-4b68-8af5-1b68817cdfec.png"><img src="https://user-images.githubusercontent.com/114244957/209054737-e132e7d7-39e1-4b68-8af5-1b68817cdfec.png"/></a></figure><p id="e46b6b52-bc43-43b4-9c20-9ebc3ab2e999" class="">image</p><h3 id="1e99790e-ce54-4791-b49b-afbd646e6eb5" class="">Connection diagram: [maybe can be simplified more, combine two diagrams together]</h3><figure id="26af9b64-c10b-490d-bb28-7fd224f21992" class="image"><a href="https://user-images.githubusercontent.com/105755054/209586978-436b4cda-e3fc-4f70-898d-24c44655fe77.jpg"><img src="https://user-images.githubusercontent.com/105755054/209586978-436b4cda-e3fc-4f70-898d-24c44655fe77.jpg"/></a></figure><p id="01a2d889-22d1-4bfa-821f-f3243b53cd4b" class="">Diagram -3</p><figure id="b6e8f17a-f484-443d-a051-8bc0f5c705e0" class="image"><a href="https://user-images.githubusercontent.com/105755054/209586979-868ce4b7-8ca1-4089-a0ca-004812f5446d.jpg"><img src="https://user-images.githubusercontent.com/105755054/209586979-868ce4b7-8ca1-4089-a0ca-004812f5446d.jpg"/></a></figure><p id="3da11dfc-d72a-4527-bcfc-b9c91b6cfe74" class="">Diagram -4</p><h3 id="bedc6e80-e949-4f83-82a5-2bf9f8521da5" class="">Development environment</h3><ul id="4a47a4ed-bb23-4abb-a787-8c27a4a7f408" class="bulleted-list"><li style="list-style-type:disc">Visual Studio Code Version: 1.74.2</li></ul><pre id="d5f9b461-60b7-4453-b334-79bac2063d80" class="code code-wrap"><code>Test on: MacBook Pro (14-inch, 2021)
+    
+    Software: macOS Monterey 12.6</code></pre><ul id="7a64c7be-37cb-4b22-ba92-aa7e5c1ac084" class="bulleted-list"><li style="list-style-type:disc">Arduino IDE Version: 1.8.20</li></ul><pre id="a9f141d8-3e54-40d1-835c-2385ac699801" class="code code-wrap"><code>Test on: MacBook Pro (14-inch, 2021)
+    
+    Software: macOS Monterey 12.6</code></pre><h3 id="a77df95c-58d5-4013-aa8a-dba0cfa74827" class="">Links to codes</h3><p id="229a8bae-992f-4a8f-9c59-e02a5053451f" class="">SEE REPO.</p><hr id="824c1ea0-3627-4632-8bb7-27ab7571c2d6"/><h2 id="b69cddd2-2ae0-417f-a1a6-cb3f69653331" class=""><mark class="highlight-orange">Project development</mark></h2><h3 id="8722d289-9ca3-4a46-818e-07a035091e2e" class="">Beginning</h3><p id="23b2ea2c-95af-43b1-96bd-8401b00db22a" class="">This the the team’s initial proposal slideshow. A detailed description about the project is shown in the video. </p><figure id="3a8cc336-3d3d-44eb-80ba-bc78a52ac3f4"><div class="source"><a href="https://docs.google.com/presentation/d/1t87cv9p3CeJUlsETCPSfEi2vsW76WDrAiFLQtDDplcw/edit?usp=sharing">https://docs.google.com/presentation/d/1t87cv9p3CeJUlsETCPSfEi2vsW76WDrAiFLQtDDplcw/edit?usp=sharing</a></div></figure><h3 id="5128e6db-c5d4-48ea-9387-25d562ed1d05" class="">Midpoint Checkup</h3><p id="4a34848d-0700-4890-9d14-9f22d80952df" class="">This the the team’s midpoint checkup slideshow. It is for internal use during the development of the project. </p><figure id="03dd7d30-ef53-44f3-a504-aa4c6263a905"><div class="source"><a href="https://docs.google.com/presentation/d/15bB733aYIH5O1ynS-uNRryCd-YGT2AP3RCA227Z42LM/edit?usp=sharing">https://docs.google.com/presentation/d/15bB733aYIH5O1ynS-uNRryCd-YGT2AP3RCA227Z42LM/edit?usp=sharing</a></div></figure><p id="d45622ac-2536-48ea-84df-dc709605a11d" class="">The team has setup four midpoint checks to ensure that the team have a right pace in the project. The four checkpoint items are: - Pico4ML is able to perform person detection and return signals. - Adafruit SHT40 is able to return humidity and temperature values. - LCD can communicate with RP2040. - Some kind of REPL that returns sensor data.</p><p id="b310703d-b916-47a8-9d28-d184db6d1139" class="">In the midpoint check, the team has successfully performed person detection in Pico4ML. Pico4ML produces a “person score” that shows if the detected object is a person. The score range from negative to positive. When the score is over 90, the detected object is a person. Usually, a human in a good light and background environment will get a score at around 110. The team was thinking to use I2C to directly transfer this “person score” to RP2040. RP2040 will do the calculation.</p><p id="5e026f58-9024-437c-91a6-fdcb8fec4850" class="">The team has also successfully perform humidity and temperature detection in SHT40. The sensor can have a directly communication with the RP2040 using PIO. More detailed description about using PIO is discussed in the later section. However, the team realized that using a LCD as the display cannot give out the most information. Since our project highly rely on the heat index map (shown below). Our instructor gave the advice that the team should implement the heat map to the display. LCD would not be sufficient. Thus, after discussion, the team has decided to use a 16x32 RGB LED matrix panel as the final display.</p><figure id="5951682e-3d07-42c7-ac52-ace86703d9e4" class="image"><a href="https://user-images.githubusercontent.com/114244957/209482149-3001af36-f5fa-468c-a7f0-c49ae5233d5d.png"><img src="https://user-images.githubusercontent.com/114244957/209482149-3001af36-f5fa-468c-a7f0-c49ae5233d5d.png"/></a></figure><p id="6e47211b-2bce-4d5d-b5da-aa4d57db958d" class="">Hit Index Map</p><p id="77bd67cb-940d-4228-88cb-3616a7f7bc50" class="">The team always had REPL to indicate the chip process and data return.</p><h3 id="69362823-6a68-4636-b51f-4bc30a19307f" class="">Final Design</h3><p id="abc85779-9057-45ac-91f1-fd19e4cae1bc" class="">This is the team’s final demo day slideshow. It was initially in slides. During the demo day, it was changed to a single page poster. </p><figure id="0f7f5853-1ad9-431a-9fa9-8ffeaa80e2f6"><div class="source"><a href="https://docs.google.com/presentation/d/1gsq2rLiZDhrBSmuCHu-VE6WdknTC6gEK/edit?usp=sharing&amp;ouid=117714499329064750219&amp;rtpof=true&amp;sd=true">https://docs.google.com/presentation/d/1gsq2rLiZDhrBSmuCHu-VE6WdknTC6gEK/edit?usp=sharing&amp;ouid=117714499329064750219&amp;rtpof=true&amp;sd=true</a></div></figure><p id="4161d868-373d-422f-a826-6a87fcbee611" class="">After a more detailed look at the RP2040 pins, the team realized that they don’t have enough pins to achieve more complex communication. Thus, the team has simplified the communication method. Instead of using I2C to communicate between Pico4ML and RP2040, the team has chosen to use <code>GPIO</code> high and low voltage as the signal.</p><p id="f0f48947-8766-457b-b172-b3fc355147f4" class="">During the final stage, the team ensured that all the modules are working individually. The team’s main focus was on the communication. The team’s initial plan was to use two QTPY boards to communicate. One would be responsible for getting the sensor data, the other would be the MAIN board that collects all the information and integrate the together. After discussion, the team realized that one single board can finish all the work. Since the communication process has been simplified, Pico4ML and QTPY will only communicate using one GPIO pin. The new RGB LED matrix will have to use an Arduino board. The communication between Arduino and QTPY is UART.</p><hr id="b957beaf-352d-4c18-b0fe-b6ab823dc31f"/><h2 id="885c2521-be78-440d-8295-9b8e23e53539" class=""><mark class="highlight-orange">Reflections</mark></h2><p id="1bc1e32a-64ed-44d3-acff-749f1174c639" class="">Design &amp; components selection The team’s initial design is to use two QTPY 2040 and one Pico4ML. It was designed so that the project would be highly “modulated”. Each teammate could work on their own component without interference. However, this design would require a lot of communication among three boards. The power consumption would also be high. During project development, the team has changed their strategy to integrate all functions to as few hardware as possible. There are two reasons:</p><ol type="1" id="28c28914-a819-4825-b2ac-77ef10bd8bf5" class="numbered-list" start="1"><li>The team has change from LCD display to a larger LED display. The larger LED display will be more visible from long distance and contains more information. To implement the display, the team used an Arduino Uno Rev3. This increased the number of boards in the system. Thus, the team decided to reduce one QTPY 2040 to simplify the system.</li></ol><ol type="1" id="8b7e3e19-994e-4956-89fb-08c9632c15c4" class="numbered-list" start="2"><li>The device was designed to be mounted on the wall. The team would like to reduce the weight and size of the device to make it more compact.</li></ol><hr id="13e579ad-1790-4a13-9a15-5a8ed2ec9109"/><h2 id="91e9ae0b-d676-46c0-89a2-897a6e53f0b3" class=""><mark class="highlight-orange">Feature Highlights</mark></h2><ul id="171c8e33-9a5b-40f5-bfb2-3a10036ca485" class="bulleted-list"><li style="list-style-type:disc">Transfer Humidity and Temperature values in QTPY2040 to Arduino Uno Rev3 using UART</li></ul><p id="7efb528d-7cd8-4483-92f1-c9435e752d55" class="">[need code]</p><ul id="969a0030-b2f6-4f31-99f7-00f53cfcad23" class="bulleted-list"><li style="list-style-type:disc">Vivid graphic display using LED matrix</li></ul><ul id="47806962-2972-47b4-846e-b867c8f0981a" class="bulleted-list"><li style="list-style-type:disc">6 models display control – humidity adjust, temperature adjust, feeling temperature, visualization (specific face patterns), rainbow (10 colors to show different humidity and temperature), DEMO (being able to control HUMIDITY ADJUST &amp; TEMPERATURE ADJUST)</li></ul><p id="2eafb8a4-179c-4e59-b2b3-4c282b1611f9" class="">[demo code in C]</p><hr id="f815063e-e072-4205-900e-2dcc7d2118e0"/><h2 id="eb169e8d-b5fb-4314-9733-59869c9115a1" class=""><mark class="highlight-orange">PIO in use</mark></h2><ul id="6c00b599-b4eb-4353-8e46-908af285c401" class="bulleted-list"><li style="list-style-type:disc">I2C communication protocol base on PIO</li></ul><ul id="685534f5-5c4b-48f3-9f3e-0a6341bad846" class="bulleted-list"><li style="list-style-type:disc">Basic Pseudo Code of SH4X Temperature and Humidity Sensor with I2C Protocol</li></ul><figure id="f69cc710-0f00-4406-8313-530477f04628" class="image"><a href="https://user-images.githubusercontent.com/105755054/209400650-359622ef-bf4a-4e53-b3c9-4f99f7749005.png"><img src="https://user-images.githubusercontent.com/105755054/209400650-359622ef-bf4a-4e53-b3c9-4f99f7749005.png"/></a></figure><p id="95de4d7d-002f-42b5-b265-0926e3962d0b" class="">Screen Shot 2022-12-23 at 14 57 51</p><figure id="5067c5e2-5ea7-4b7a-baf9-488d08abcd00" class="image"><a href="https://user-images.githubusercontent.com/105755054/209401537-53491948-e8ca-4f8b-a470-d835c4b929f1.png"><img src="https://user-images.githubusercontent.com/105755054/209401537-53491948-e8ca-4f8b-a470-d835c4b929f1.png"/></a></figure><ul id="ddad70d0-d2e4-432a-ab64-df8a95228616" class="bulleted-list"><li style="list-style-type:disc">SHT4X Header</li></ul><pre id="8e31e3d1-fc3c-4d92-b98b-e4b7971453a1" class="code code-wrap"><code>#ifndef SHT4X_H
+    #define SHT4X_H
+    
+    #include &lt;stdio.h&gt;
+    #include &quot;pico/stdlib.h&quot;
+    #include &quot;pico/binary_info.h&quot;
+    #include &quot;pio_i2c.h&quot;
+    
+    void read_temp_hum(int32_t *temp, int32_t *hum, PIO pio, uint sm, uint32_t addr);
+    
+    #endif
+    </code></pre><ul id="bc68906c-377c-4c3c-884b-77f818143950" class="bulleted-list"><li style="list-style-type:disc">SHT4X C code with Explanation</li></ul><pre id="5d05932f-4771-4ec4-9057-32a9d6b2a466" class="code code-wrap"><code>#include &lt;stdio.h&gt;
+    #include &quot;pico/stdlib.h&quot;
+    #include &quot;pico/binary_info.h&quot;
+    #include &quot;pio_i2c.h&quot;
+    #include &lt;math.h&gt;
+    
+    //enable the sensor and measure temp. and hum.
+    #define INIT_CONFIG 0xFD
+    
+    //address of sht40
+    const int addr = 0x44;
+    #define SDA 22
+    #define SCL 23
+    
+    //using PIO0 and SM0 as I2C trasimission
+    PIO pio = pio0;
+    uint sm = 0;
+    
+    void read_temp_hum(int32_t *temp, int32_t *hum, PIO pio, uint sm, uint32_t addr){
+    
+        //create an empty array for storing the starting-comment of SH4X
+        uint8_t tx_bytes[1];
+    
+        //create an empty array for storing the data reading from the I2C data parts
+        uint8_t data[6];
+    
+        //Transmit the starting comment to SH4X sensor via I2C writing
+        tx_bytes[0] = INIT_CONFIG;
+        pio_i2c_write_blocking(pio, sm, addr, tx_bytes, 1, true);
+        sleep_ms(10);
+    
+        //Read data from the I2C slaver with 6 Bytes each period
+        pio_i2c_read_blocking(pio, sm, addr, data, 6, false);
+    
+        //combine the raw-temperature data togeter
+        int raw_temperature = data[0]*256 + data[1];
+    
+        //combine the raw-humidity data
+        int raw_humidity = data[3]*256 + data[4];
+    
+        //covert the raw data to readable temperatire and humidity
+        float termperature = ((175 * (raw_temperature/65536.00)) - 45.00);
+        float humidity = ((125 * (raw_temperature/65536.00)) - 6.00);
+    
+        //return the termperture and humidity with integers
+        *temp = termperature;
+        *hum = humidity;
+    }</code></pre><h3 id="cf08ef12-d2d6-4da2-b6dd-fb6694df76dc" class="">Diagram of the overall logic</h3><ul id="12cc9330-2a67-49d9-b9a5-85185af958b2" class="bulleted-list"><li style="list-style-type:disc">Functional Block Diagram of SH4X Sensor</li></ul><figure id="36a5472c-b4a0-4194-ab38-3462169d25ad" class="image"><a href="https://user-images.githubusercontent.com/105755054/209403700-2b47f540-c5d8-4c41-a90c-52999b19417e.png"><img style="width:384px" src="https://user-images.githubusercontent.com/105755054/209403700-2b47f540-c5d8-4c41-a90c-52999b19417e.png"/></a></figure><ul id="c60ee52f-202f-4259-8f34-87bace81e7b7" class="bulleted-list"><li style="list-style-type:disc">QTPY2040 and SHT40 with I2C</li></ul><figure id="685f3825-3bec-436a-9ee3-7a98bd7b2a85" class="image" style="text-align:center"><a href="https://user-images.githubusercontent.com/105755054/209403649-c859e95d-843f-4192-a022-69d03cebf5af.png"><img style="width:528px" src="https://user-images.githubusercontent.com/105755054/209403649-c859e95d-843f-4192-a022-69d03cebf5af.png"/></a></figure><hr id="336871d0-889b-4c4b-966c-da070af01fad"/><h3 id="f54c1550-9007-4882-96a8-b338c455e17b" class=""><mark class="highlight-orange">Introduction to the RP2040 PIO module</mark></h3><p id="2c041143-9ef1-4526-9145-a2117dd2b097" class="">One unique feature of the RP2040 microcontroller from the Raspberry Pi Foundation is its Programmable I/O (PIO) peripheral. The focus of PIO is serial communication. Most microcontrollers have hardware support for popular serial protocols such as I²C, SPI, and UART. However, this hardware support is always limited both in the number of serial interfaces and the types of serial interfaces that can be used, such as Arduino Uno Rev3 only having 1 UART port. If you have a non-standard serial interface you need to support, you may have to resort to bit-banging I/O pins to implement it, tying up the microcontroller core to get the timing right. PIO aims to solve this problem by providing a highly configurable, programmable I/O peripheral that will take care of the bit-banging and provide simple input and output FIFO queues to the microcontroller core.</p><p id="658f565e-0ff3-49b7-917e-9129c1965fc7" class="">There are two PIO blocks with four state machines each, that can independently execute sequential programs to manipulate GPIOs and transfer data. Unlike a general-purpose processor, PIO state machines are highly specialized for IO, with a focus on determinism, precise timing, and close integration with fixed-function hardware. Each state machine and its supporting hardware occupy approximately the same silicon area as a standard serial interface block, such as an SPI or I2C controller. However, PIO state machines can be configured and reconfigured dynamically to implement numerous different interfaces.</p><p id="cc0b7e28-f02a-4a52-8059-2ad889e094d5" class="">In our project, we used PIO_I2C to replace the traditional I2C protocol. There are some PIO examples that we have modified to be able to use in our project.</p><pre id="7458859c-2770-4b82-9dcc-93fad1425df7" class="code code-wrap"><code>pio_i2c_write_blocking(pio, sm, addr, tx_bytes, 1, true);
+    pio_i2c_read_blocking(pio, sm, addr, data, 6, false);</code></pre><hr id="ff11ce68-eca6-4102-afba-e198e163e965"/><p id="f41fa808-f849-4128-98db-aa68d75fa554" class="">
+    </p></div></article></body></html>
