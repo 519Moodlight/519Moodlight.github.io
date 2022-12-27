@@ -1,41 +1,214 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<style>  
-    div.padded {  
-      padding-top: 0px;  
-      padding-right: 100px;  
-      padding-bottom: 0.25in;  
-      padding-left: 100px;  
-    }  
-  </style> 
-<title>CS 184 Final Project</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
-</head>
-<body>
-<br />
-<h1 align="middle">Final Project: Texture support in ray tracer</h1>
-<h4 align="middle">Charlotte Mei</h4>
-<h4 align="middle">Jingqi Huang</h4>
-<h4 align="middle">Ryan Solan</h4>
-<h4 align="middle">Yuankai Yang</h4>
+<h1 id="519moodlight-github-io">519Moodlight.github.io</h1>
+<p>All contents are written first in the README file.</p>
+<p>Contents from Canvas:</p>
+<ul>
+<li>A project showcase (brief project overview with cool photos/videos, probably on your main page).</li>
+<li>Project instructions, in enough detail that someone else could re-create your project (components used, assembly details, block diagrams, description of your RP2040 dev environment, links to your code, etc).</li>
+<li>Narrative overview of your project&#39;s development, and how it evolved from proposal to demo day (showing photos/screenshots/gifs at each stage).</li>
+<li>Any significant issues you had to troubleshoot, and how you solved them or adapted your plans (including diagrams, REPL sessions, scope traces, etc.)</li>
+<li>Reflections on your design and components/parts you selected, including advantages/disadvantages, whether you would recommend a similar design to future teams, and other design approaches/components you might try next time.</li>
+<li>A bit more detail about some feature or accomplishment you found particularly satisfying.</li>
+<li>An explanation of the PIO part of your code, including a diagram of the overal logic, as well as an introduction to the RP2040 PIO module and what makes it a unique asset for a microcontroller.</li>
+<li><p>Team overview (ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages.</p>
+</li>
+<li><p>Use your new team github organization to publish a repo containing your project code. Include a README.md file with a brief overview and block diagram of the code in this repo. </p>
+</li>
+<li>Upload all photos/videos you&#39;ve taken for project documentation (components, debugging, progress, final demos, demo day action shots), as well as your demo day slides you set up on your monitors, to this Google Drive Links to an external site.under your team folder. Send me a note if you&#39;re planning to upload more than 10GB.</li>
+</ul>
+<h2 id="project-showcase">Project Showcase</h2>
+<p>Our team aims to invent a sensing device that will measure the in-room apparent temperature by detecting room temperature and humidity. The user can customize their favoriate display mode. The device has six modes: </p>
+<ul>
+<li>Mode TMEP: shows the room temperature</li>
+<li>Mode RHUM: shows the room relative humidity</li>
+<li>Mode FEEL: shows the in-room apparent temperature, i.e. how your body feels in the room</li>
+<li>Mode FACE: shows either a smiling or crying face based on temperatuer and humidity, can be customized by the user</li>
+<li>Mode RAINBOW: shows a heat index map across all the measuing range for the sensor and indicate the &quot;location&quot; of the current measurements</li>
+<li>Mode ROLL: shows all the five modes in a rolling sequence</li>
+</ul>
+<p>All of the indications are presented on a 16x32 RGB LED matrix panel. The device is also equipped with a person detection function. When ever a human is reading the infomation on the panel, the panel will be changed to the user&#39;s favorite mode. For example, if the user prefers to see the RAINBOW mode, he/she will set the mode to their prefer mode. The next time when he/she reads the the panel, the camera will detect human activity and change the display to RAINBOW mode until they leave.</p>
+<p><img src="https://user-images.githubusercontent.com/105755054/209399661-72d4c804-97a8-429d-8177-e13ec1642303.JPG" alt="DSC00521">
+<img src="https://user-images.githubusercontent.com/105755054/209399679-f63e8f3c-6dd7-4774-b391-c7e45855b4cc.JPG" alt="DSC00517">
+<img src="https://user-images.githubusercontent.com/105755054/209399670-80a55a39-d921-40ad-bdda-d567670175ac.JPG" alt="DSC00518">
+<img src="https://user-images.githubusercontent.com/105755054/209399728-d41d9359-d014-4621-a9dd-84a485e6c4e3.JPG" alt="DSC00519">
+<img src="https://user-images.githubusercontent.com/105755054/209399611-c63fcece-f27d-4203-9335-e9cd4a059b81.JPG" alt="DSC00520"></p>
+<h2 id="project-instrcutions">Project instrcutions</h2>
+<h3 id="components-">Components:</h3>
+<ul>
+<li>Pico4ML</li>
+<li>Adafruit SHT40 </li>
+<li>Adafruit QT-PY 2040</li>
+<li>16x32 RGB LED matrix panel </li>
+<li>Arduino Uno Rev3</li>
+<li>PC/Laptop as REPL screen (Can be removed in realiife application)</li>
+<li>Resistors</li>
+<li>Adafruit Perma-Proto Half-sized Breadboard PCB</li>
+</ul>
+<h3 id="block-diagram-">Block diagram:</h3>
+<p><img src="https://user-images.githubusercontent.com/114244957/209054737-e132e7d7-39e1-4b68-8af5-1b68817cdfec.png" alt="image"></p>
+<h3 id="connection-diagram-maybe-can-be-simplified-more-combine-two-diagrams-together-">Connection diagram: [maybe can be simplified more, combine two diagrams together]</h3>
+<p><img src="https://user-images.githubusercontent.com/105755054/209586978-436b4cda-e3fc-4f70-898d-24c44655fe77.jpg" alt="Diagram -3"></p>
+<p><img src="https://user-images.githubusercontent.com/105755054/209586979-868ce4b7-8ca1-4089-a0ca-004812f5446d.jpg" alt="Diagram -4"></p>
+<h3 id="development-environment">Development environment</h3>
+<ul>
+<li>Vidusl Studio Code Version: 1.74.2
+```
+Test on: MacBook Pro (14-inch, 2021)</li>
+</ul>
+<p>Software: macOS Monterey 12.6 </p>
+<pre><code>
+<span class="hljs-selector-tag">-</span> <span class="hljs-selector-tag">Arduino</span> <span class="hljs-selector-tag">IDE</span> <span class="hljs-selector-tag">Version</span>: 1<span class="hljs-selector-class">.8</span><span class="hljs-selector-class">.20</span>
+</code></pre><p>Test on: MacBook Pro (14-inch, 2021)</p>
+<p>Software: macOS Monterey 12.6 </p>
+<pre><code>
+### Links <span class="hljs-keyword">to</span> codes
+SEE REPO. 
 
-<div class="padded">
-    <h2 align="middle">Problem Description</h2>
-    <p>In project 3-1 and 3-2 we implemented pathtraced rendering on glass, mirror and microfacet material.
-        However, we didn't have support for various textures. In this final project, we want to add texture support 
-        to make the rendering more appealing and interesting.</p >
-    
-    <h2 align="middle">Goals and Deliverables</h2>
-   <div align="left">
-    <h4 align="middle">What we plan to deliver?</h2>
-    <p>Our goal is to be able to map various textures including cloths and simple 2D textures to objects.</p >
-    <p>We want to keep the rendering fast, reusable, and able to cope with different textures realistically.
-        We think that the basic logic of implementing texture mapping is the same as the one introduced in class.
-        We could build on that and try to find suitable reflection and refraction for varied and complicated
-        textures such as clothes, which involve more complex reflection and refraction techniques.
-    </p >
+## Project development
+### Beginning
+This the the team<span class="hljs-symbol">'s</span> initial proposal slideshow. A detialed description about the project <span class="hljs-keyword">is</span> shown <span class="hljs-keyword">in</span> the video.
+https://docs.google.com/presentation/d/<span class="hljs-number">1</span>t87cv9p3CeJUlsETCPSfEi2vsW76WDrAiFLQtDDplcw/edit?usp=sharing
+https://youtu.be/xyOEmyO56Lc
 
-    <h4 align="middle">What we hope to deliver?</h2>
-    <p>We would hope to achieve a rabbit wearing realistic cloth (including pleats and yarn), or make the rabbit look furry. To accomplish this
+### Midpoint Checkup
+This the the team<span class="hljs-symbol">'s</span> midpoint checkup slideshow. It <span class="hljs-keyword">is</span> <span class="hljs-keyword">for</span> internal <span class="hljs-keyword">use</span> during the development <span class="hljs-keyword">of</span> the project. https://docs.google.com/presentation/d/<span class="hljs-number">15</span>bB733aYIH5O1ynS-uNRryCd-YGT2AP3RCA227Z42LM/edit?usp=sharing
+
+The team has setup four midpoint checks <span class="hljs-keyword">to</span> ensure that the team have a right pace <span class="hljs-keyword">in</span> the project. The four checkput items are:
+- Pico4ML <span class="hljs-keyword">is</span> able <span class="hljs-keyword">to</span> perform person detection <span class="hljs-keyword">and</span> <span class="hljs-keyword">return</span> signals.
+- Adafruit SHT40 <span class="hljs-keyword">is</span> able <span class="hljs-keyword">to</span> <span class="hljs-keyword">return</span> humidity <span class="hljs-keyword">and</span> temperature values.
+- LCD can communicate <span class="hljs-keyword">with</span> RP2040.
+- Some kind <span class="hljs-keyword">of</span> REPL that returns sensor data.
+
+<span class="hljs-keyword">In</span> the midepoint check, the team has successfully performed person detection <span class="hljs-keyword">in</span> Pico4ML. Pico4ML produces a <span class="hljs-string">"person score"</span> that shows <span class="hljs-keyword">if</span> the detected object <span class="hljs-keyword">is</span> a person. The score <span class="hljs-keyword">range</span> from negative <span class="hljs-keyword">to</span> <span class="hljs-built_in">positive</span>. <span class="hljs-keyword">When</span> the score <span class="hljs-keyword">is</span> over <span class="hljs-number">90</span>, the detected object <span class="hljs-keyword">is</span> a person. Usually, a human <span class="hljs-keyword">in</span> a goot light <span class="hljs-keyword">and</span> backgroun environemnt will get a score at around <span class="hljs-number">110</span>. The team was thinking <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> I2C <span class="hljs-keyword">to</span> directly tansfer this <span class="hljs-string">"person score"</span> <span class="hljs-keyword">to</span> RP2040. RP2040 will do the calculation.
+
+The team has also successfully perform humidity <span class="hljs-keyword">and</span> temperature detection <span class="hljs-keyword">in</span> SHT40. THe sensor can have a directly communication <span class="hljs-keyword">with</span> the RP2040 using PIO. More detailed discription about using PIO <span class="hljs-keyword">is</span> discussed <span class="hljs-keyword">in</span> the later section. However, the team realized that using a LCD as the display cannot give <span class="hljs-keyword">out</span> the most infomation. Since our project highly rely <span class="hljs-keyword">on</span> the heat index <span class="hljs-keyword">map</span> (shown below). Our instructor gave the advice that the team should inplement the heat <span class="hljs-keyword">map</span> <span class="hljs-keyword">to</span> the display. LCD would <span class="hljs-keyword">not</span> be sufficient. Thus, <span class="hljs-keyword">after</span> discussion, the team has decided <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> a <span class="hljs-number">16</span>x32 RGB LED matrix panel as the final display.
+
+![image](https://user-images.githubusercontent.com/<span class="hljs-number">114244957</span>/<span class="hljs-number">209482149</span>-<span class="hljs-number">3001</span>af36-f5fa-<span class="hljs-number">468</span>c-a7f0-c49ae5233d5d.png)
+
+The team always had REPL <span class="hljs-keyword">to</span> indicate the chip <span class="hljs-keyword">process</span> <span class="hljs-keyword">and</span> data <span class="hljs-keyword">return</span>.
+
+### Final Design
+This <span class="hljs-keyword">is</span> the team<span class="hljs-symbol">'s</span> final demo day slideshow. It was initally <span class="hljs-keyword">in</span> slides. During the demo day, it was changed <span class="hljs-keyword">to</span> a single page poster.
+https://docs.google.com/presentation/d/<span class="hljs-number">1</span>gsq2rLiZDhrBSmuCHu-VE6WdknTC6gEK/edit?usp=sharing&amp;ouid=<span class="hljs-number">117714499329064750219</span>&amp;rtpof=<span class="hljs-literal">true</span>&amp;sd=<span class="hljs-literal">true</span>
+
+<span class="hljs-keyword">After</span> a more detailed look at the RP2040 pins, the team realized that they don<span class="hljs-symbol">'t</span> have enough pins <span class="hljs-keyword">to</span> achieve more complex communication. Thus, the team has simplified the communication method. Instead <span class="hljs-keyword">of</span> useing I2C <span class="hljs-keyword">to</span> communciate between Pico4ML <span class="hljs-keyword">and</span> RP2040, the team has chosen <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> ```GPIO``` high <span class="hljs-keyword">and</span> low voltage as the <span class="hljs-keyword">signal</span>. 
+
+During the final stage, the team ensured that <span class="hljs-keyword">all</span> the modules are working individually. The team<span class="hljs-symbol">'s</span> main focus was <span class="hljs-keyword">on</span> the communication. The team<span class="hljs-symbol">'s</span> initial plan was <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> two QTPY boards <span class="hljs-keyword">to</span> communicate. One would be responsible <span class="hljs-keyword">for</span> getting the sensor data, the other would be the MAIN board that collects <span class="hljs-keyword">all</span> the information <span class="hljs-keyword">and</span> intergrate the together. <span class="hljs-keyword">After</span> discussion, the team realized that one single board can finish <span class="hljs-keyword">all</span> the work. Since the communication <span class="hljs-keyword">process</span> has been simplified, Pico4ML <span class="hljs-keyword">and</span> QTPY will only communicate using one GPIO pin. The <span class="hljs-keyword">new</span> RGB LED matrix will have <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> an Arduino board. The communication between Arduino <span class="hljs-keyword">and</span> QTPY <span class="hljs-keyword">is</span> UART.
+
+## Reflections
+Design &amp; components selection
+The team<span class="hljs-symbol">'s</span> initial design <span class="hljs-keyword">is</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> two QTPY <span class="hljs-number">2040</span> <span class="hljs-keyword">and</span> one Pico4ML. It was designed so that the project would be highly <span class="hljs-string">"modulized"</span>. Each teammate could work <span class="hljs-keyword">on</span> their own componenet without interference. However, this design would reqiure a lot <span class="hljs-keyword">of</span> communication among three boards. The power consumption would also be high. During project development, the team has changed their stagertgy <span class="hljs-keyword">to</span> intergate <span class="hljs-keyword">all</span> functions <span class="hljs-keyword">to</span> as few hardwares as possible. There are two reasons:
+
+<span class="hljs-number">1</span>. The team has change from LCD display <span class="hljs-keyword">to</span> a larger LED display. The larger LED display will be more visible from long distance <span class="hljs-keyword">and</span> contains more infomation. <span class="hljs-keyword">To</span> implement the display, the team used an Arduino Uno Rev3. This increased the number <span class="hljs-keyword">of</span> boards <span class="hljs-keyword">in</span> the system. Thus, the team decided <span class="hljs-keyword">to</span> reduce one QTPY <span class="hljs-number">2040</span> <span class="hljs-keyword">to</span> simplify the system.
+
+<span class="hljs-number">2</span>. The device was designed <span class="hljs-keyword">to</span> be mounted <span class="hljs-keyword">on</span> the wall. The team would like <span class="hljs-keyword">to</span> reduce the weight <span class="hljs-keyword">and</span> size <span class="hljs-keyword">of</span> the device <span class="hljs-keyword">to</span> make it more compact.
+
+## Feature Highlights
+- Transfer Humidity <span class="hljs-keyword">and</span> Temperature values <span class="hljs-keyword">in</span> QTPY2040 <span class="hljs-keyword">to</span> Arduino Uno Rev3 using UART
+
+[need code]
+
+- Vivid graphic display using LED matrix
+
+- <span class="hljs-number">6</span> models display control <span class="hljs-comment">-- humidity adjust, temperature adjust, feeling temperature, visualization (specific face patterns), rainbow (10 colors to show different humidity and temperature), DEMO (being able to control HUMIDITY ADJUST &amp; TEMPERATURE ADJUST)</span>
+
+[demo code <span class="hljs-keyword">in</span> C]
+
+
+## PIO <span class="hljs-keyword">in</span> <span class="hljs-keyword">use</span>
+- I2C communication protocol base <span class="hljs-keyword">on</span> PIO 
+
+- Basic Pseudo Code <span class="hljs-keyword">of</span> SH4X Temp.&amp;Humidity Sensor <span class="hljs-keyword">with</span> I2C Protocol
+
+![Screen Shot <span class="hljs-number">2022</span>-<span class="hljs-number">12</span>-<span class="hljs-number">23</span> at <span class="hljs-number">14</span> <span class="hljs-number">57</span> <span class="hljs-number">51</span>](https://user-images.githubusercontent.com/<span class="hljs-number">105755054</span>/<span class="hljs-number">209400650</span>-<span class="hljs-number">359622</span>ef-bf4a-<span class="hljs-number">4e53</span>-b3c9-<span class="hljs-number">4</span>f99f7749005.png)
+
+![Screen Shot <span class="hljs-number">2022</span>-<span class="hljs-number">12</span>-<span class="hljs-number">23</span> at <span class="hljs-number">15</span> <span class="hljs-number">09</span> <span class="hljs-number">40</span>](https://user-images.githubusercontent.com/<span class="hljs-number">105755054</span>/<span class="hljs-number">209401537</span>-<span class="hljs-number">53491948</span>-e8ca-<span class="hljs-number">4</span>f8b-a470-d835c4b929f1.png)
+
+
+- SHT4X Hearder
+</code></pre><p>#ifndef SHT4X_H</p>
+<p>#define SHT4X_H</p>
+<p>#include <stdio.h></p>
+<p>#include &quot;pico/stdlib.h&quot;</p>
+<p>#include &quot;pico/binary_info.h&quot;</p>
+<p>#include &quot;pio_i2c.h&quot;</p>
+<p>void read_temp_hum(int32_t <em>temp, int32_t </em>hum, PIO pio, uint sm, uint32_t addr);</p>
+<p>#endif</p>
+<pre><code>-  SHT4X C <span class="hljs-keyword">code</span> <span class="hljs-keyword">with</span> Explaination
+</code></pre><p>#include <stdio.h></p>
+<p>#include &quot;pico/stdlib.h&quot;</p>
+<p>#include &quot;pico/binary_info.h&quot;</p>
+<p>#include &quot;pio_i2c.h&quot;</p>
+<p>#include <math.h></p>
+<p>//enable the sensor and measure temp. and hum.</p>
+<p>#define INIT_CONFIG 0xFD </p>
+<p>//address of sht40
+const int addr = 0x44; </p>
+<p>#define SDA 22</p>
+<p>#define SCL 23</p>
+<p>//using PIO0 and SM0 as I2C trasimission 
+PIO pio = pio0; 
+uint sm = 0;</p>
+<p>void read_temp_hum(int32_t <em>temp, int32_t </em>hum, PIO pio, uint sm, uint32_t addr){</p>
+<pre><code><span class="hljs-comment">//create an empty array for storing the starting-comment of SH4X</span>
+uint8_t tx_bytes[<span class="hljs-number">1</span>];  
+
+<span class="hljs-comment">//create an empty array for storing the data reading from the I2C data parts</span>
+uint8_t data[<span class="hljs-number">6</span>];
+
+<span class="hljs-comment">//Transmit the starting comment to SH4X sensor via I2C writing</span>
+tx_bytes[<span class="hljs-number">0</span>] = INIT_CONFIG;
+pio_i2c_write_blocking(pio, sm, addr, tx_bytes, <span class="hljs-number">1</span>, true);
+sleep_ms(<span class="hljs-number">10</span>);
+
+<span class="hljs-comment">//Read data from the I2C slaver with 6 Bytes each period</span>
+pio_i2c_read_blocking(pio, sm, addr, data, <span class="hljs-number">6</span>, false); 
+
+<span class="hljs-comment">//combine the raw-temperature data togeter</span>
+int raw_temperature = data[<span class="hljs-number">0</span>]*<span class="hljs-number">256</span> + data[<span class="hljs-number">1</span>]; 
+
+<span class="hljs-comment">//combine the raw-humidity data </span>
+int raw_humidity = data[<span class="hljs-number">3</span>]*<span class="hljs-number">256</span> + data[<span class="hljs-number">4</span>];
+
+<span class="hljs-comment">//covert the raw data to readable temperatire and humidity</span>
+<span class="hljs-type">float</span> termperature = ((<span class="hljs-number">175</span> * (raw_temperature/<span class="hljs-number">65536.00</span>)) - <span class="hljs-number">45.00</span>);
+<span class="hljs-type">float</span> humidity = ((<span class="hljs-number">125</span> * (raw_temperature/<span class="hljs-number">65536.00</span>)) - <span class="hljs-number">6.00</span>);
+
+<span class="hljs-comment">//return the termperture and humidity with integers</span>
+*temp = termperature;
+*hum = humidity;
+</code></pre><p>}</p>
+<pre><code><span class="hljs-comment">### Diagram of the overal logic</span>
+- Functional Block Diagram <span class="hljs-keyword">of</span> SH4X Sensor 
+
+![Screen Shot <span class="hljs-number">2022</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span> <span class="hljs-keyword">at</span> <span class="hljs-number">15</span> <span class="hljs-number">14</span> <span class="hljs-number">31</span>](<span class="hljs-keyword">https</span>://user-images.githubusercontent.com/<span class="hljs-number">105755054</span>/<span class="hljs-number">209403700</span><span class="hljs-number">-2</span>b47f540-c5d8<span class="hljs-number">-4</span>c41-a90c<span class="hljs-number">-52999</span>b19417e.png)
+
+
+- QTPY2040 <span class="hljs-keyword">and</span> SHT40 <span class="hljs-keyword">with</span> I2C
+
+![Screen Shot <span class="hljs-number">2022</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span> <span class="hljs-keyword">at</span> <span class="hljs-number">15</span> <span class="hljs-number">38</span> <span class="hljs-number">48</span>](<span class="hljs-keyword">https</span>://user-images.githubusercontent.com/<span class="hljs-number">105755054</span>/<span class="hljs-number">209403649</span>-c859e95d<span class="hljs-number">-843</span>f<span class="hljs-number">-4192</span>-a022<span class="hljs-number">-69</span>d03cebf5af.png)
+
+
+<span class="hljs-comment">### Introduction to the RP2040 PIO module</span>
+One unique feature <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> RP2040 microcontroller <span class="hljs-built_in">from</span> <span class="hljs-keyword">the</span> Raspberry Pi Foundation is its Programmable I/O (PIO) peripheral. The focus <span class="hljs-keyword">of</span> PIO is serial communication. Most microcontrollers have hardware support <span class="hljs-keyword">for</span> popular serial protocols such <span class="hljs-keyword">as</span> I²C, SPI, <span class="hljs-keyword">and</span> UART. However, this hardware support is always limited both <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> serial interfaces <span class="hljs-keyword">and</span> <span class="hljs-keyword">the</span> types <span class="hljs-keyword">of</span> serial interfaces that can be used, such <span class="hljs-keyword">as</span> Arduino uno Rev3 only having <span class="hljs-number">1</span> UART port. If you have <span class="hljs-keyword">a</span> non-standard serial interface you need <span class="hljs-built_in">to</span> support, you may have <span class="hljs-built_in">to</span> resort <span class="hljs-built_in">to</span> bit-banging I/O pins <span class="hljs-built_in">to</span> implement <span class="hljs-keyword">it</span>, tying up <span class="hljs-keyword">the</span> microcontroller core <span class="hljs-built_in">to</span> <span class="hljs-built_in">get</span> <span class="hljs-keyword">the</span> timing <span class="hljs-literal">right</span>. PIO aims <span class="hljs-built_in">to</span> solve this problem <span class="hljs-keyword">by</span> providing <span class="hljs-keyword">a</span> highly configurable, programmable I/O peripheral that will take care <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> bit-banging <span class="hljs-keyword">and</span> provide simple input <span class="hljs-keyword">and</span> output FIFO queues <span class="hljs-built_in">to</span> <span class="hljs-keyword">the</span> microcontroller core.
+
+There are <span class="hljs-literal">two</span> PIO blocks <span class="hljs-keyword">with</span> <span class="hljs-literal">four</span> state machines <span class="hljs-keyword">each</span>, that can independently execute sequential programs <span class="hljs-built_in">to</span> manipulate GPIOs <span class="hljs-keyword">and</span> transfer data. Unlike <span class="hljs-keyword">a</span> general-purpose processor, PIO state machines are highly specialized <span class="hljs-keyword">for</span> IO, <span class="hljs-keyword">with</span> <span class="hljs-keyword">a</span> focus <span class="hljs-keyword">on</span> <span class="hljs-title">determinism</span>, <span class="hljs-title">precise</span> <span class="hljs-title">timing</span>, <span class="hljs-title">and</span> <span class="hljs-title">close</span> <span class="hljs-title">integration</span> <span class="hljs-title">with</span> <span class="hljs-title">fixed-function</span> <span class="hljs-title">hardware</span>. <span class="hljs-title">Each</span> <span class="hljs-title">state</span> <span class="hljs-title">machine</span> <span class="hljs-title">and</span> <span class="hljs-title">its</span> <span class="hljs-title">supporting</span> <span class="hljs-title">hardware</span> <span class="hljs-title">occupy</span> <span class="hljs-title">approximately</span> <span class="hljs-title">the</span> <span class="hljs-title">same</span> <span class="hljs-title">silicon</span> <span class="hljs-title">area</span> <span class="hljs-title">as</span> <span class="hljs-title">a</span> <span class="hljs-title">standard</span> <span class="hljs-title">serial</span> <span class="hljs-title">interface</span> <span class="hljs-title">block</span>, <span class="hljs-title">such</span> <span class="hljs-title">as</span> <span class="hljs-title">an</span> <span class="hljs-title">SPI</span> <span class="hljs-title">or</span> <span class="hljs-title">I2C</span> <span class="hljs-title">controller</span>. <span class="hljs-title">However</span>, <span class="hljs-title">PIO</span> <span class="hljs-title">state</span> <span class="hljs-title">machines</span> <span class="hljs-title">can</span> <span class="hljs-title">be</span> <span class="hljs-title">configured</span> <span class="hljs-title">and</span> <span class="hljs-title">reconfigured</span> <span class="hljs-title">dynamically</span> <span class="hljs-title">to</span> <span class="hljs-title">implement</span> <span class="hljs-title">numerous</span> <span class="hljs-title">different</span> <span class="hljs-title">interfaces</span>.
+
+In our project, we used PIO_I2C <span class="hljs-built_in">to</span> <span class="hljs-built_in">replace</span> <span class="hljs-keyword">the</span> traditional I2C protocol. There are some PIO examples that we have modified <span class="hljs-built_in">to</span> be able <span class="hljs-built_in">to</span> use <span class="hljs-keyword">in</span> our project.
+</code></pre><p>pio_i2c_write_blocking(pio, sm, addr, tx_bytes, 1, true);
+pio_i2c_read_blocking(pio, sm, addr, data, 6, false); 
+```</p>
+<h2 id="team-overview">Team overview</h2>
+<p>(ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages</p>
+<ul>
+<li>Katrina Ji</li>
+</ul>
+<p>Personal github: <a href="https://github.com/katrinaji">https://github.com/katrinaji</a></p>
+<p>Email: katji@seas.upenn.edu</p>
+<ul>
+<li>Yuchen Wang</li>
+</ul>
+<p>Personal github: wangybv@seas.upenn.edu</p>
+<ul>
+<li>Chongyuan Zhang</li>
+</ul>
+<p>Email: zcy6@seas.upenn.edu</p>
