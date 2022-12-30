@@ -1,16 +1,16 @@
-# 519Moodlight
+# ESE 519Moodlight
 ![image](https://user-images.githubusercontent.com/114244957/210037409-66f8b48e-220a-4067-9869-5d23ebac4f38.png)
 
 ## Project Showcase
-Our team aims to invent a sensing device that will measure the in-room apparent temperature by detecting room temperature and humidity. The user can customize their favoriate display mode. The device has six modes: 
+Our team aims to invent a sensing device that will measure the in-room apparent temperature by detecting room temperature and humidity. The user can customize their favorite display mode. The device has five modes: 
+
 - Mode TMEP: shows the room temperature
 - Mode RHUM: shows the room relative humidity
-- Mode FEEL: shows the in-room apparent temperature, i.e. how your body feels in the room
-- Mode FACE: shows either a smiling or crying face based on temperatuer and humidity, can be customized by the user
-- Mode RAINBOW: shows a heat index map across all the measuing range for the sensor and indicate the "location" of the current measurements
-- Mode ROLL: shows all the five modes in a rolling sequence
+- Mode FEEL: shows the in-room apparent temperature, i.e. how your body feels in the room 
+- Mode FACE: shows either a smiling or crying face based on temperature and humidity, can be customized by the user
+- Mode RAINBOW: shows a heat index map across all the measuring range for the sensor and indicate the “location” of the current measurements 
 
-All of the indications are presented on a 16x32 RGB LED matrix panel. The device is also equipped with a person detection function. When ever a human is reading the infomation on the panel, the panel will be changed to the user's favorite mode. For example, if the user prefers to see the RAINBOW mode, he/she will set the mode to their prefer mode. The next time when he/she reads the the panel, the camera will detect human activity and change the display to RAINBOW mode until they leave.
+All of the indications are presented on a 16x32 RGB LED matrix panel. The device is also equipped with a person detection function. Whenever a human is in the vision area of the camera, the panel will be changed to a user’s preferred mode. For example, if the user prefers to see the RAINBOW mode, he/she will set the mode to their prefer mode first. The next time when he/she reads the the panel, the camera will detect human activity and change the display to RAINBOW mode until they leave.
 
 ![DSC00521](https://user-images.githubusercontent.com/105755054/209399661-72d4c804-97a8-429d-8177-e13ec1642303.JPG)
 ![DSC00517](https://user-images.githubusercontent.com/105755054/209399679-f63e8f3c-6dd7-4774-b391-c7e45855b4cc.JPG)
@@ -18,30 +18,30 @@ All of the indications are presented on a 16x32 RGB LED matrix panel. The device
 ![DSC00519](https://user-images.githubusercontent.com/105755054/209399728-d41d9359-d014-4621-a9dd-84a485e6c4e3.JPG)
 ![DSC00520](https://user-images.githubusercontent.com/105755054/209399611-c63fcece-f27d-4203-9335-e9cd4a059b81.JPG)
 
+A brief introduction video:
+https://youtu.be/Q91RQ9lhCjs
+
 ## Project instrcutions
 ### Components:
 - Pico4ML
-- Adafruit SHT40 
-- Adafruit QT-PY 2040
-- 16x32 RGB LED matrix panel 
-- Arduino Uno Rev3
-- PC/Laptop as REPL screen (Can be removed in realiife application)
-- Resistors
+- PC/Laptop as REPL screen (Can be removed in real life application)
+- Adafruit SHT40
 - Adafruit Perma-Proto Half-sized Breadboard PCB
+- Adafruit QT-PY 2040
+- 16x32 RGB LED matrix panel
+- Arduino Uno Rev3
 
 ### Block diagram:
-
 ![image](https://user-images.githubusercontent.com/114244957/209054737-e132e7d7-39e1-4b68-8af5-1b68817cdfec.png)
 
-### Connection diagram: [maybe can be simplified more, combine two diagrams together]
-
-![Diagram -3](https://user-images.githubusercontent.com/105755054/209586978-436b4cda-e3fc-4f70-898d-24c44655fe77.jpg)
-
-![Diagram -4](https://user-images.githubusercontent.com/105755054/209586979-868ce4b7-8ca1-4089-a0ca-004812f5446d.jpg)
+### Connection diagram:
+![image](https://user-images.githubusercontent.com/114244957/210038095-91d749de-a1d0-4a9c-b667-0490e970d384.png)
+![image](https://user-images.githubusercontent.com/114244957/210038099-a5e1e9bc-2d51-4218-a9d0-3027a37649e9.png)
 
 ### Development environment
 
 - Vidusl Studio Code Version: 1.74.2
+- Visual Studio Code Version: 1.73.1
 ```
 Test on: MacBook Pro (14-inch, 2021)
 
@@ -56,61 +56,169 @@ Software: macOS Monterey 12.6
 ```
     
 ### Links to codes
-SEE REPO. 
+See Team REPO. 
 
 ## Project development
-### Beginning
-This the the team's initial proposal slideshow. A detialed description about the project is shown in the video.
+### Kick-off
+This the the team’s initial proposal slideshow. A detailed description about the project is shown in the video. 
 https://docs.google.com/presentation/d/1t87cv9p3CeJUlsETCPSfEi2vsW76WDrAiFLQtDDplcw/edit?usp=sharing
 https://youtu.be/xyOEmyO56Lc
 
 ### Midpoint Checkup
-This the the team's midpoint checkup slideshow. It is for internal use during the development of the project. https://docs.google.com/presentation/d/15bB733aYIH5O1ynS-uNRryCd-YGT2AP3RCA227Z42LM/edit?usp=sharing
+This the the team’s midpoint checkup slideshow. It is for internal use during the development of the project.
+https://docs.google.com/presentation/d/15bB733aYIH5O1ynS-uNRryCd-YGT2AP3RCA227Z42LM/edit?usp=sharing
 
-The team has setup four midpoint checks to ensure that the team have a right pace in the project. The four checkput items are:
-- Pico4ML is able to perform person detection and return signals.
-- Adafruit SHT40 is able to return humidity and temperature values.
-- LCD can communicate with RP2040.
-- Some kind of REPL that returns sensor data.
+The team has setup four midpoint checks to ensure that the team have a right pace in the project. The four checkpoint items are: - Pico4ML is able to perform person detection and return signals. - Adafruit SHT40 is able to return humidity and temperature values. - LCD can communicate with RP2040. - Some kind of REPL that returns sensor data.
 
-In the midepoint check, the team has successfully performed person detection in Pico4ML. Pico4ML produces a "person score" that shows if the detected object is a person. The score range from negative to positive. When the score is over 90, the detected object is a person. Usually, a human in a goot light and backgroun environemnt will get a score at around 110. The team was thinking to use I2C to directly tansfer this "person score" to RP2040. RP2040 will do the calculation.
+In the midpoint check, the team has successfully performed person detection in Pico4ML. Pico4ML produces a “person score” that shows if the detected object is a person. The score range from negative to positive. When the score is over 90, the detected object is a person. Usually, a human in a good light and background environment will get a score at around 110. The team was thinking to use I2C to directly transfer this “person score” to RP2040. RP2040 will do the calculation.
 
-The team has also successfully perform humidity and temperature detection in SHT40. THe sensor can have a directly communication with the RP2040 using PIO. More detailed discription about using PIO is discussed in the later section. However, the team realized that using a LCD as the display cannot give out the most infomation. Since our project highly rely on the heat index map (shown below). Our instructor gave the advice that the team should inplement the heat map to the display. LCD would not be sufficient. Thus, after discussion, the team has decided to use a 16x32 RGB LED matrix panel as the final display.
+The team has also successfully perform humidity and temperature detection in SHT40. The sensor can have a directly communication with the RP2040 using PIO. More detailed description about using PIO is discussed in the later section. However, the team realized that using a LCD as the display cannot give out the most information. Since our project highly rely on the heat index map (shown below). Our instructor gave the advice that the team should implement the heat map to the display. LCD would not be sufficient. Thus, after discussion, the team has decided to use a 16x32 RGB LED matrix panel as the final display.
 
 ![image](https://user-images.githubusercontent.com/114244957/209482149-3001af36-f5fa-468c-a7f0-c49ae5233d5d.png)
 
 The team always had REPL to indicate the chip process and data return.
 
 ### Final Design
-This is the team's final demo day slideshow. It was initally in slides. During the demo day, it was changed to a single page poster.
+This is the team’s final demo day slideshow. It was initially in slides. During the demo day, it was changed to a single page poster. 
 https://docs.google.com/presentation/d/1gsq2rLiZDhrBSmuCHu-VE6WdknTC6gEK/edit?usp=sharing&ouid=117714499329064750219&rtpof=true&sd=true
 
-After a more detailed look at the RP2040 pins, the team realized that they don't have enough pins to achieve more complex communication. Thus, the team has simplified the communication method. Instead of useing I2C to communciate between Pico4ML and RP2040, the team has chosen to use ```GPIO``` high and low voltage as the signal. 
+After a more detailed look at the RP2040 pins, the team realized that they don’t have enough pins to achieve more complex communication. Thus, the team has simplified the communication method. Instead of using I2C to communicate between Pico4ML and RP2040, the team has chosen to use GPIO high and low voltage as the signal.
 
-During the final stage, the team ensured that all the modules are working individually. The team's main focus was on the communication. The team's initial plan was to use two QTPY boards to communicate. One would be responsible for getting the sensor data, the other would be the MAIN board that collects all the information and intergrate the together. After discussion, the team realized that one single board can finish all the work. Since the communication process has been simplified, Pico4ML and QTPY will only communicate using one GPIO pin. The new RGB LED matrix will have to use an Arduino board. The communication between Arduino and QTPY is UART.
+During the final stage, the team ensured that all the modules are working individually. The team’s main focus was on the communication. The team’s initial plan was to use two QTPY boards to communicate. One would be responsible for getting the sensor data, the other would be the MAIN board that collects all the information and integrate the together. After discussion, the team realized that one single board can finish all the work. Since the communication process has been simplified, Pico4ML and QTPY will only communicate using one GPIO pin. The new RGB LED matrix will have to use an Arduino board. The communication between Arduino and QTPY is UART.
 
 ## Reflections
-Design & components selection
-The team's initial design is to use two QTPY 2040 and one Pico4ML. It was designed so that the project would be highly "modulized". Each teammate could work on their own componenet without interference. However, this design would reqiure a lot of communication among three boards. The power consumption would also be high. During project development, the team has changed their stagertgy to intergate all functions to as few hardwares as possible. There are two reasons:
+Design & components selection The team’s initial design is to use two QTPY 2040 and one Pico4ML. It was designed so that the project would be highly “modulated”. Each teammate could work on their own component without interference. However, this design would require a lot of communication among three boards. The power consumption would also be high. During project development, the team has changed their strategy to integrate all functions to as few hardware as possible. There are two reasons:
 
-1. The team has change from LCD display to a larger LED display. The larger LED display will be more visible from long distance and contains more infomation. To implement the display, the team used an Arduino Uno Rev3. This increased the number of boards in the system. Thus, the team decided to reduce one QTPY 2040 to simplify the system.
-
+1. The team has change from LCD display to a larger LED display. The larger LED display will be more visible from long distance and contains more information. To implement the display, the team used an Arduino Uno Rev3. This increased the number of boards in the system. Thus, the team decided to reduce one QTPY 2040 to simplify the system.
 2. The device was designed to be mounted on the wall. The team would like to reduce the weight and size of the device to make it more compact.
 
 ## Feature Highlights
 - Transfer Humidity and Temperature values in QTPY2040 to Arduino Uno Rev3 using UART
+UART needs two ports — TX and RX. The team picked port 20 and 5 as the UART ports on QTPY 2040 as recommended.
+![image](https://user-images.githubusercontent.com/114244957/210037877-1ba00a3b-8046-4206-9eeb-247f92173d57.png)
+```
+#define UART_TX_PIN 20 //UART TX1
+#define UART_RX_PIN 5 //UART RX1
+```
+The team picked port 12 and 13 as the TX and RX for Arduino. The communication protocol for our system is a string. For example, if the temperature is negative 9 degree calculus and humidity is 54%, the string will be STR-09H54M0FN . If the temperature is 23 degree calculus and humidity is 89%, the string will be STR 23H89M0FN . The meaning of M0 will be explained in the next.
+```
+//Start forming a string
+strcat(str, "STR");
+strcat(str, sign);
+if(temp <= 9)
+    strcat(str, "0");
+strcat(str, stemp);
+strcat(str, "H");
+if(hum <= 9)
+    strcat(str, "0");
+strcat(str, shum);
+strcat(str, "M");
+strcat(str, smode);
+strcat(str, "FN");
 
-[need code]
+int32_t ustrlen;
+ustrlen = strlen(str);
+printf("%s, length is %d\n",str,ustrlen);
+printf("smode is %s\n", smode);
 
-- Vivid graphic display using LED matrix
+//Uart Transmisstion
+uart_puts(UART_ID,str);
+//uart_puts(UART_ID,"STR 42H95M4FN"); // For direct testing
+sleep_ms(500);
+```
+- Five-mode control for Display
+There are five modes for this device. 1) Temperature, 2) Humidity, 3) Feeling temperature, 4) Face visualization (specific face patterns), 5) Rainbow (10 colors to show different humidity and temperature). Every time the Mode button is pressed, the mode will increment by one.
+```
+//String Process about negative
+if(temp < 0){
+    sign = "-";
+    temp = -temp;
+}
+itoa(temp, stemp, 10);
+itoa(hum, shum, 10);
+printf("Input string: temp is %s, hum is %s.\n", stemp, shum);
+```
+```
+//If the mode button is pressed
+if(gpio_get(A0) ==1){
+    printf("A0 is pressed.\n");
+    switch (mcounter)
+    {
+    case 0:
+        smode = "0";
+        printf("Case TEMP\n");
+        mcounter ++;
+        break;
+    case 1:
+        smode = "1";
+        printf("Case RHUM\n");
+        mcounter ++;
+        break;
+    case 2:
+        smode = "2";
+        printf("Case APPT\n");
+        mcounter ++;
+        break;
+    case 3:
+        smode = "3";
+        printf("Case FACE\n");
+        mcounter ++;
+        break;
+    case 4:
+        smode = "4";
+        printf("Case RAINBOW\n");
+        mcounter ++;
+        break;
+    case 5:
+        smode = "5";
+        printf("Case DEMO\n");
+        mcounter = 0;
+        break;
+    default:
+        break;
+    }
+}
+```
+- Temperature and Humidity adjustment for DEMO.
+Since the team would like to present all of the functions of the device, two extra buttons have been added. In this way, the temperature and humidity can be manually set for demo use.
+```
+//For demo use, initilize temp and hum
+int32_t temp_stp = 8;
+int32_t hum_stp = 6;
+int32_t temp_counter = 0;
+int32_t hum_counter = 0;
 
-- 6 models display control -- humidity adjust, temperature adjust, feeling temperature, visualization (specific face patterns), rainbow (10 colors to show different humidity and temperature), DEMO (being able to control HUMIDITY ADJUST & TEMPERATURE ADJUST)
-
-[demo code in C]
-
+//For demo
+if(gpio_get(A1) == 1){
+    sleep_ms(250);
+    if(temp_counter == 0){
+        temp = -24;
+    }
+    temp = temp + temp_stp;
+    temp_counter ++;
+    if(temp >= 44){
+        temp_counter = 0;
+        temp = 44;
+    }
+    printf("********************\nA1 is pressed. Set temperature to %d.\n", temp);
+}
+if(gpio_get(A2) == 1){
+    sleep_ms(250);
+    if(hum_counter == 0){
+        hum = -5; //base
+    }
+    hum = hum + hum_stp;
+    hum_counter ++;
+    if(hum >= 97){
+        hum_counter = 0;
+        hum = 97;
+    }
+    printf("********************\nA2 is pressed. Set humidity to %d.\n", hum);
+}
+```
 
 ## PIO in use
-- I2C communication protocol base on PIO 
+- I2C communication protocol base on PIO
 
 - Basic Pseudo Code of SH4X Temp.&Humidity Sensor with I2C Protocol
 
