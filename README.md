@@ -319,7 +319,6 @@ pio_i2c_read_blocking(pio, sm, addr, data, 6, false);
 ```
 
 ## Team overview 
-(ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages
 - Katrina Ji
 
 Personal github: https://github.com/katrinaji
