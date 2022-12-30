@@ -40,7 +40,7 @@ https://youtu.be/Q91RQ9lhCjs
 
 ### Development environment
 
-- Vidusl Studio Code Version: 1.74.2
+- Vidual Studio Code Version: 1.74.2
 - Visual Studio Code Version: 1.73.1
 ```
 Test on: MacBook Pro (14-inch, 2021)
