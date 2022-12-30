@@ -79,7 +79,8 @@ The team has also successfully perform humidity and temperature detection in SHT
 The team always had REPL to indicate the chip process and data return.
 
 ### Final Design
-This is the team’s final demo day slideshow. It was initially in slides. During the demo day, it was changed to a single page poster. 
+This is the team’s final demo day slideshow. It was initially in slides. During the demo day, it was changed to a single page poster.
+
 https://docs.google.com/presentation/d/1gsq2rLiZDhrBSmuCHu-VE6WdknTC6gEK/edit?usp=sharing&ouid=117714499329064750219&rtpof=true&sd=true
 
 After a more detailed look at the RP2040 pins, the team realized that they don’t have enough pins to achieve more complex communication. Thus, the team has simplified the communication method. Instead of using I2C to communicate between Pico4ML and RP2040, the team has chosen to use GPIO high and low voltage as the signal.
