@@ -1,18 +1,5 @@
-# 519Moodlight.github.io
-All contents are written first in the README file.
-
-Contents from Canvas:
-- A project showcase (brief project overview with cool photos/videos, probably on your main page).
-- Project instructions, in enough detail that someone else could re-create your project (components used, assembly details, block diagrams, description of your RP2040 dev environment, links to your code, etc).
-- Narrative overview of your project's development, and how it evolved from proposal to demo day (showing photos/screenshots/gifs at each stage).
-- Any significant issues you had to troubleshoot, and how you solved them or adapted your plans (including diagrams, REPL sessions, scope traces, etc.)
-- Reflections on your design and components/parts you selected, including advantages/disadvantages, whether you would recommend a similar design to future teams, and other design approaches/components you might try next time.
-- A bit more detail about some feature or accomplishment you found particularly satisfying.
-- An explanation of the PIO part of your code, including a diagram of the overal logic, as well as an introduction to the RP2040 PIO module and what makes it a unique asset for a microcontroller.
-- Team overview (ideally with brief photos/bios, up to you) with links to your individual github accounts or personal pages.
-
-- Use your new team github organization to publish a repo containing your project code. Include a README.md file with a brief overview and block diagram of the code in this repo. 
-- Upload all photos/videos you've taken for project documentation (components, debugging, progress, final demos, demo day action shots), as well as your demo day slides you set up on your monitors, to this Google Drive Links to an external site.under your team folder. Send me a note if you're planning to upload more than 10GB.
+# 519Moodlight
+![image](https://user-images.githubusercontent.com/114244957/210037409-66f8b48e-220a-4067-9869-5d23ebac4f38.png)
 
 ## Project Showcase
 Our team aims to invent a sensing device that will measure the in-room apparent temperature by detecting room temperature and humidity. The user can customize their favoriate display mode. The device has six modes: 
