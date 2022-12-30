@@ -21,7 +21,7 @@ All of the indications are presented on a 16x32 RGB LED matrix panel. The device
 A brief introduction video:
 https://youtu.be/Q91RQ9lhCjs
 
-## Project instrcutions
+## Project instructions
 ### Components:
 - Pico4ML
 - PC/Laptop as REPL screen (Can be removed in real life application)
