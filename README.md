@@ -227,7 +227,7 @@ if(gpio_get(A2) == 1){
 ![Screen Shot 2022-12-23 at 15 09 40](https://user-images.githubusercontent.com/105755054/209401537-53491948-e8ca-4f8b-a470-d835c4b929f1.png)
 
 
-- SHT4X Hearder
+- SHT4X Header
 
 ```
 #ifndef SHT4X_H
@@ -243,7 +243,7 @@ void read_temp_hum(int32_t *temp, int32_t *hum, PIO pio, uint sm, uint32_t addr)
 #endif
 
 ```
--  SHT4X C code with Explaination
+-  SHT4X C code with Explanation
 
 ```
 #include <stdio.h>
@@ -295,7 +295,7 @@ void read_temp_hum(int32_t *temp, int32_t *hum, PIO pio, uint sm, uint32_t addr)
     *hum = humidity;
 }
 ```
-### Diagram of the overal logic
+### Diagram of the overall logic
 - Functional Block Diagram of SH4X Sensor 
 
 ![Screen Shot 2022-12-23 at 15 14 31](https://user-images.githubusercontent.com/105755054/209403700-2b47f540-c5d8-4c41-a90c-52999b19417e.png)
